@@ -1,54 +1,56 @@
-# multi-agent-shogun
+# multi-agent-guild
 
 <div align="center">
 
-**Multi-Agent Orchestration System for Claude Code**
+**Claude Code 冒険者ギルド運営システム**
 
-*One command. Eight AI agents working in parallel.*
+*依頼書1つで、8体のAIエージェントが並列稼働*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blueviolet)](https://claude.ai)
 [![tmux](https://img.shields.io/badge/tmux-required-green)](https://github.com/tmux/tmux)
 
-[English](README.md) | [Japanese / 日本語](README_ja.md)
+[English](readme_en.md) | [日本語](README.md)
 
 </div>
 
 ---
 
-## What is this?
+## これは何？
 
-**multi-agent-shogun** is a system that runs multiple Claude Code instances simultaneously, organized like a feudal Japanese army.
+**multi-agent-guild** は、複数の Claude Code インスタンスを同時に実行し、冒険者ギルドの運営構造として統率するシステムです。
 
-**Why use this?**
-- Give one command, get 8 AI workers executing in parallel
-- No waiting - you can keep giving commands while tasks run in background
-- AI remembers your preferences across sessions (Memory MCP)
-- Real-time progress tracking via dashboard
+**なぜ使うのか？**
+- 1つの依頼で、8体の冒険者が並列で実行
+- 待ち時間なし - クエストがバックグラウンドで進行中も次の依頼を出せる
+- AIがセッションを跨いであなたの好みを記憶（Memory MCP）
+- クエスト掲示板（dashboard.md）でリアルタイム進行確認
+
+**ギルドの流れ:** 依頼 → クエスト → 冒険 → 報告
 
 ```
-        You (The Lord)
-             │
-             ▼ Give orders
-      ┌─────────────┐
-      │   SHOGUN    │  ← Receives your command, delegates immediately
-      └──────┬──────┘
-             │ YAML files + tmux
-      ┌──────▼──────┐
-      │    KARO     │  ← Distributes tasks to workers
-      └──────┬──────┘
-             │
-    ┌─┬─┬─┬─┴─┬─┬─┬─┐
-    │1│2│3│4│5│6│7│8│  ← 8 workers execute in parallel
-    └─┴─┴─┴─┴─┴─┴─┴─┘
-        ASHIGARU
+      あなた（依頼者）
+           │
+           ▼ 依頼書を提出
+    ┌─────────────┐
+    │   GUILDMASTER    │  ← 依頼を受け取り、即座に委譲
+    └──────┬──────┘
+           │ YAMLファイル + tmux
+    ┌──────▼──────┐
+    │    RECEPTIONIST     │  ← クエストを分解し配分
+    └──────┬──────┘
+           │
+  ┌─┬─┬─┬─┴─┬─┬─┬─┐
+  │1│2│3│4│5│6│7│8│  ← 8体の冒険者が並列実行
+  └─┴─┴─┴─┴─┴─┴─┴─┘
+      ADVENTURERS
 ```
 
 ---
 
-## 🚀 Quick Start
+## 🚀 クイックスタート
 
-### 🪟 Windows Users (Most Common)
+### 🪟 Windowsユーザー（最も一般的）
 
 <table>
 <tr>
@@ -59,11 +61,11 @@
 </td>
 <td>
 
-📥 **Download this repository**
+📥 **リポジトリをダウンロード**
 
-[Download ZIP](https://github.com/yohey-w/multi-agent-shogun/archive/refs/heads/main.zip) and extract to `C:\tools\multi-agent-shogun`
+[ZIPダウンロード](https://github.com/yohey-w/multi-agent-guild/archive/refs/heads/main.zip) して `C:\tools\multi-agent-guild` に展開
 
-*Or use git:* `git clone https://github.com/yohey-w/multi-agent-shogun.git C:\tools\multi-agent-shogun`
+*または git を使用:* `git clone https://github.com/yohey-w/multi-agent-guild.git C:\tools\multi-agent-guild`
 
 </td>
 </tr>
@@ -75,9 +77,9 @@
 </td>
 <td>
 
-🖱️ **Run `install.bat`**
+🖱️ **`install.bat` を実行**
 
-Right-click and select **"Run as administrator"** (required if WSL2 is not yet installed). The installer will guide you through each step — you may need to restart your PC or set up Ubuntu before re-running.
+右クリック→「管理者として実行」（WSL2が未インストールの場合）。WSL2 + Ubuntu をセットアップします。
 
 </td>
 </tr>
@@ -89,10 +91,10 @@ Right-click and select **"Run as administrator"** (required if WSL2 is not yet i
 </td>
 <td>
 
-🐧 **Open Ubuntu and run** (first time only)
+🐧 **Ubuntu を開いて以下を実行**（初回のみ）
 
 ```bash
-cd /mnt/c/tools/multi-agent-shogun
+cd /mnt/c/tools/multi-agent-guild
 ./first_setup.sh
 ```
 
@@ -106,7 +108,7 @@ cd /mnt/c/tools/multi-agent-shogun
 </td>
 <td>
 
-✅ **Deploy!**
+✅ **出発！**
 
 ```bash
 ./shutsujin_departure.sh
@@ -116,38 +118,38 @@ cd /mnt/c/tools/multi-agent-shogun
 </tr>
 </table>
 
-#### 📅 Daily Startup (After First Install)
+#### 📅 毎日の起動（初回セットアップ後）
 
-Open **Ubuntu terminal** (WSL) and run:
+**Ubuntuターミナル**（WSL）を開いて実行：
 
 ```bash
-cd /mnt/c/tools/multi-agent-shogun
+cd /mnt/c/tools/multi-agent-guild
 ./shutsujin_departure.sh
 ```
 
 ---
 
 <details>
-<summary>🐧 <b>Linux / Mac Users</b> (Click to expand)</summary>
+<summary>🐧 <b>Linux / Mac ユーザー</b>（クリックで展開）</summary>
 
-### First-Time Setup
+### 初回セットアップ
 
 ```bash
-# 1. Clone the repository
-git clone https://github.com/yohey-w/multi-agent-shogun.git ~/multi-agent-shogun
-cd ~/multi-agent-shogun
+# 1. リポジトリをクローン
+git clone https://github.com/yohey-w/multi-agent-guild.git ~/multi-agent-guild
+cd ~/multi-agent-guild
 
-# 2. Make scripts executable
+# 2. スクリプトに実行権限を付与
 chmod +x *.sh
 
-# 3. Run first-time setup
+# 3. 初回セットアップを実行
 ./first_setup.sh
 ```
 
-### Daily Startup
+### 毎日の起動
 
 ```bash
-cd ~/multi-agent-shogun
+cd ~/multi-agent-guild
 ./shutsujin_departure.sh
 ```
 
@@ -156,430 +158,447 @@ cd ~/multi-agent-shogun
 ---
 
 <details>
-<summary>❓ <b>What is WSL2? Why do I need it?</b> (Click to expand)</summary>
+<summary>❓ <b>WSL2とは？なぜ必要？</b>（クリックで展開）</summary>
 
-### About WSL2
+### WSL2について
 
-**WSL2 (Windows Subsystem for Linux)** lets you run Linux inside Windows. This system uses `tmux` (a Linux tool) to manage multiple AI agents, so WSL2 is required on Windows.
+**WSL2（Windows Subsystem for Linux）** は、Windows内でLinuxを実行できる機能です。このシステムは `tmux`（Linuxツール）を使って複数のAIエージェントを管理するため、WindowsではWSL2が必要です。
 
-### Don't have WSL2 yet?
+### WSL2がまだない場合
 
-No problem! When you run `install.bat`, it will:
-1. Check if WSL2 is installed (auto-install if missing)
-2. Check if Ubuntu is installed (auto-install if missing)
-3. Guide you to the next steps (`first_setup.sh`)
+問題ありません！`install.bat` を実行すると：
+1. WSL2がインストールされているかチェック（なければ自動インストール）
+2. Ubuntuがインストールされているかチェック（なければ自動インストール）
+3. 次のステップ（`first_setup.sh` の実行方法）を案内
 
-**Quick install command** (run in PowerShell as Administrator):
+**クイックインストールコマンド**（PowerShellを管理者として実行）：
 ```powershell
 wsl --install
 ```
 
-Then restart your computer and run `install.bat` again.
+その後、コンピュータを再起動して `install.bat` を再実行してください。
 
 </details>
 
 ---
 
 <details>
-<summary>📋 <b>Script Reference</b> (Click to expand)</summary>
+<summary>📋 <b>スクリプトリファレンス</b>（クリックで展開）</summary>
 
-| Script | Purpose | When to Run |
-|--------|---------|-------------|
-| `install.bat` | Windows: WSL2 + Ubuntu setup | First time only |
-| `first_setup.sh` | Installs tmux, Node.js, Claude Code CLI + configures Memory MCP | First time only |
-| `shutsujin_departure.sh` | Creates tmux sessions + starts Claude Code + loads instructions | Every day |
+| スクリプト | 用途 | 実行タイミング |
+|-----------|------|---------------|
+| `install.bat` | Windows: WSL2 + Ubuntu のセットアップ | 初回のみ |
+| `first_setup.sh` | tmux、Node.js、Claude Code CLI のインストール + Memory MCP設定 | 初回のみ |
+| `shutsujin_departure.sh` | tmuxセッション作成 + Claude Code起動 + 指示書読み込み | 毎日 |
 
-### What `install.bat` does automatically:
-- ✅ Checks if WSL2 is installed (auto-install if missing)
-- ✅ Checks if Ubuntu is installed (auto-install if missing)
-- ✅ Guides you to the next steps (`first_setup.sh`)
+### `install.bat` が自動で行うこと：
+- ✅ WSL2がインストールされているかチェック（未インストールなら案内）
+- ✅ Ubuntuがインストールされているかチェック（未インストールなら案内）
+- ✅ 次のステップ（`first_setup.sh` の実行方法）を案内
 
-### What `shutsujin_departure.sh` does:
-- ✅ Creates tmux sessions (shogun + multiagent)
-- ✅ Launches Claude Code on all agents
-- ✅ Automatically loads instruction files for each agent
-- ✅ Resets queue files for a fresh start
+### `shutsujin_departure.sh` が行うこと：
+- ✅ tmuxセッションを作成（guildmaster + multiagent）
+- ✅ 全エージェントでClaude Codeを起動
+- ✅ 各エージェントに指示書を自動読み込み
+- ✅ キューファイルをリセットして新しい状態に
 
-**After running, all agents are ready to receive commands immediately!**
+**実行後、全エージェントが即座に依頼を受け付ける準備完了！**
 
 </details>
 
 ---
 
 <details>
-<summary>🔧 <b>Prerequisites (for manual setup)</b> (Click to expand)</summary>
+<summary>🔧 <b>必要環境（手動セットアップの場合）</b>（クリックで展開）</summary>
 
-If you prefer to install dependencies manually:
+依存関係を手動でインストールする場合：
 
-| Requirement | How to install | Notes |
-|-------------|----------------|-------|
-| WSL2 + Ubuntu | `wsl --install` in PowerShell | Windows only |
-| Set Ubuntu as default | `wsl --set-default Ubuntu` | Required for scripts to work |
-| tmux | `sudo apt install tmux` | Terminal multiplexer |
-| Node.js v20+ | `nvm install 20` | Required for Claude Code CLI |
-| Claude Code CLI | `npm install -g @anthropic-ai/claude-code` | Anthropic's official CLI |
+| 要件 | インストール方法 | 備考 |
+|------|-----------------|------|
+| WSL2 + Ubuntu | PowerShellで `wsl --install` | Windowsのみ |
+| Ubuntuをデフォルトに設定 | `wsl --set-default Ubuntu` | スクリプトの動作に必要 |
+| tmux | `sudo apt install tmux` | ターミナルマルチプレクサ |
+| Node.js v20+ | `nvm install 20` | Claude Code CLIに必要 |
+| Claude Code CLI | `npm install -g @anthropic-ai/claude-code` | Anthropic公式CLI |
 
 </details>
 
 ---
 
-### ✅ What Happens After Setup
+### ✅ セットアップ後の状態
 
-After running either option, **AI agents** will start automatically:
+どちらのオプションでも、**10体のAIエージェント**が自動起動します：
 
-| Agent | Role | Quantity |
-|-------|------|----------|
-| 🏯 Shogun | Commander - receives your orders | 1 |
-| 📋 Karo | Manager - distributes tasks | 1 |
-| ⚔️ Ashigaru | Workers - execute tasks in parallel | 8 |
+| エージェント | 役割 | 数 |
+|-------------|------|-----|
+| 🛡️ ギルドマスター（Guildmaster） | 依頼統括 - 依頼を受け取る | 1 |
+| 📋 受付官（Receptionist） | 上級冒険者 - クエストを分解しミッションを割当 | 1 |
+| ⚔️ 冒険者（Adventurer） | 冒険者 - 並列でクエスト実行 | 8 |
 
-You'll see tmux sessions created:
-- `shogun` - Connect here to give commands
-- `multiagent` - Workers running in background
+tmuxセッションが作成されます：
+- `guildmaster` - ここに接続して依頼を出す
+- `multiagent` - 冒険者がバックグラウンドで稼働
 
 ---
 
-## 📖 Basic Usage
+## 📖 基本的な使い方
 
-### Step 1: Connect to Shogun
+### Step 1: ギルドマスターに接続
 
-After running `shutsujin_departure.sh`, all agents automatically load their instructions and are ready to work.
+`shutsujin_departure.sh` 実行後、全エージェントが自動的に指示書を読み込み、作業準備完了となります。
 
-Open a new terminal and connect to the Shogun:
+新しいターミナルを開いてギルドマスターに接続：
 
 ```bash
-tmux attach-session -t shogun
+tmux attach-session -t guildmaster
 ```
 
-### Step 2: Give Your First Order
+### Step 2: 最初の依頼を出す
 
-The Shogun is already initialized! Just give your command:
+ギルドマスターは既に初期化済み！そのまま依頼を出せます：
 
 ```
-Investigate the top 5 JavaScript frameworks and create a comparison table.
+JavaScriptフレームワーク上位5つを調査して比較表を作成せよ
 ```
 
-The Shogun will:
-1. Write the task to a YAML file
-2. Notify the Karo (manager)
-3. Return control to you immediately (you don't have to wait!)
+ギルドマスターは：
+1. クエストをYAMLファイルに書き込む
+2. 受付官（受付担当）に通知
+3. 即座にあなたに制御を返す（待つ必要なし！）
 
-Meanwhile, the Karo distributes the work to Ashigaru workers who execute in parallel.
+その間、受付官はクエストを冒険者に分配し、並列実行します。
 
-### Step 3: Check Progress
+### Step 3: 進捗を確認
 
-Open `dashboard.md` in your editor to see real-time status:
+エディタでクエスト掲示板（`dashboard.md`）を開いてリアルタイム状況を確認：
 
 ```markdown
-## In Progress
-| Worker | Task | Status |
-|--------|------|--------|
-| Ashigaru 1 | React research | Running |
-| Ashigaru 2 | Vue research | Running |
-| Ashigaru 3 | Angular research | Done |
+## 進行中
+| 冒険者 | クエスト | 進行状況 |
+|----------|--------|------|
+| 冒険者 1 | React調査 | 実行中 |
+| 冒険者 2 | Vue調査 | 実行中 |
+| 冒険者 3 | Angular調査 | 完了 |
 ```
 
 ---
 
-## ✨ Key Features
+## ✨ 主な特徴
 
-### ⚡ 1. Parallel Execution
+### ⚡ 1. 並列実行
 
-One command can spawn up to 8 parallel tasks:
-
-```
-You: "Research 5 MCP servers"
-→ 5 Ashigaru start researching simultaneously
-→ Results ready in minutes, not hours
-```
-
-### 🔄 2. Non-Blocking Workflow
-
-The Shogun delegates immediately and returns control to you:
+1つの依頼で最大8つの並列クエストを生成：
 
 ```
-You: Give order → Shogun: Delegates → You: Can give next order immediately
-                                           ↓
-                         Workers: Execute in background
-                                           ↓
-                         Dashboard: Shows results
+あなた: 「5つのMCPサーバを調査せよ」
+→ 5体の冒険者が同時に調査開始
+→ 数時間ではなく数分で報告が届く
 ```
 
-You never have to wait for long tasks to complete.
+### 🔄 2. ノンブロッキングワークフロー
 
-### 🧠 3. Memory Across Sessions (Memory MCP)
-
-The AI remembers your preferences:
+ギルドマスターは即座に委譲して、あなたに制御を返します：
 
 ```
-Session 1: You say "I prefer simple solutions"
-           → Saved to Memory MCP
-
-Session 2: AI reads memory at startup
-           → Won't suggest over-engineered solutions
+あなた: 依頼 → ギルドマスター: 委譲 → あなた: 次の依頼をすぐ出せる
+                                    ↓
+                    冒険者: バックグラウンドで実行
+                                    ↓
+                    掲示板: 報告を表示
 ```
 
-### 📡 4. Event-Driven (No Polling)
+長いクエストの完了を待つ必要はありません。
 
-Agents communicate via YAML files and wake each other with tmux send-keys.
-**No API calls are wasted on polling loops.**
+---
 
-### 📸 5. Screenshot Support
+## 🎮 Unityギルド特化
 
-VSCode's Claude Code extension lets you paste screenshots to explain issues. This CLI system brings the same capability:
+本ギルドは Unity ゲーム開発に特化しています。標準 Skill は以下に定義済み：
+
+- `skills/unity-adventurer-skills/`
+
+冒険者は Unity の専門クラス（エンジニア / AI / UI / 最適化 / QA）としてクエストに参加します。Skill 定義には目的・入出力・モデル適性が含まれます。
+
+### モデル切替（Unity）
+
+- **設計/アーキテクチャ/原因究明** → 推論重視モデル
+- **C#実装/Unity API作業** → コード特化モデル
+- **要約/チェックリスト** → 高速モデル
+
+### 🧠 3. セッション間記憶（Memory MCP）
+
+AIがあなたの好みを記憶します：
 
 ```
-# Configure your screenshot folder in config/settings.yaml
+セッション1: 「シンプルな方法が好き」と伝える
+            → Memory MCPに保存
+
+セッション2: 起動時にAIがメモリを読み込む
+            → 複雑な方法を提案しなくなる
+```
+
+### 📡 4. イベント駆動（ポーリングなし）
+
+エージェントはYAMLファイルで通信し、tmux send-keysで互いを起こします。
+**ポーリングループでAPIコールを浪費しません。**
+
+### 📸 5. スクリーンショット連携
+
+VSCode拡張のClaude Codeはスクショを貼り付けて事象を説明できます。このCLIシステムでも同等の機能を実現：
+
+```
+# config/settings.yaml でスクショフォルダを設定
 screenshot:
-  path: "/mnt/c/Users/YourName/Pictures/Screenshots"
+  path: "/mnt/c/Users/あなたの名前/Pictures/Screenshots"
 
-# Then just tell the Shogun:
-You: "Check the latest screenshot"
-You: "Look at the last 2 screenshots"
-→ AI reads and analyzes your screenshots instantly
+# ギルドマスターに伝えるだけ:
+あなた: 「最新のスクショを見ろ」
+あなた: 「スクショ2枚見ろ」
+→ AIが即座にスクリーンショットを読み取って分析
 ```
 
-**💡 Windows Tip:** Press `Win + Shift + S` to take a screenshot. Configure the save location to match your `settings.yaml` path for seamless integration.
+**💡 Windowsのコツ:** `Win + Shift + S` でスクショが撮れます。保存先を `settings.yaml` のパスに合わせると、シームレスに連携できます。
 
-Perfect for:
-- Explaining UI bugs visually
-- Showing error messages
-- Comparing before/after states
+こんな時に便利：
+- UIのバグを視覚的に説明
+- エラーメッセージを見せる
+- 変更前後の状態を比較
 
-### 🧠 Model Configuration
+### 📁 6. コンテキスト管理
 
-| Agent | Model | Thinking | Reason |
-|-------|-------|----------|--------|
-| Shogun | Opus | Disabled | Delegation & dashboard updates don't need deep reasoning |
-| Karo | Default | Enabled | Task distribution requires careful judgment |
-| Ashigaru | Default | Enabled | Actual implementation needs full capabilities |
+効率的な知識共有のため、3層構造のコンテキストを採用：
 
-The Shogun uses `MAX_THINKING_TOKENS=0` to disable extended thinking, reducing latency and cost while maintaining Opus-level judgment for high-level decisions.
+| レイヤー | 場所 | 用途 |
+|---------|------|------|
+| Memory MCP | `memory/guildmaster_memory.jsonl` | セッションを跨ぐ長期記憶 |
+| グローバル | `memory/global_context.md` | システム全体の設定、依頼者の好み |
+| プロジェクト | `context/{project}.md` | プロジェクト固有の知見 |
 
-### 📁 Context Management
+この設計により：
+- どの冒険者でも任意のプロジェクトを担当可能
+- エージェント切り替え時もコンテキスト継続
+- 関心の分離が明確
+- セッション間の知識永続化
 
-The system uses a three-layer context structure for efficient knowledge sharing:
+### 汎用コンテキストテンプレート
 
-| Layer | Location | Purpose |
-|-------|----------|---------|
-| Memory MCP | `memory/shogun_memory.jsonl` | Persistent memory across sessions (preferences, decisions) |
-| Global | `memory/global_context.md` | System-wide settings, user preferences |
-| Project | `context/{project}.md` | Project-specific knowledge and state |
+すべてのプロジェクトで同じ7セクション構成のテンプレートを使用：
 
-This design allows:
-- Any Ashigaru to pick up work on any project
-- Consistent context across agent switches
-- Clear separation of concerns
-- Knowledge persistence across sessions
+| セクション | 目的 |
+|-----------|------|
+| What | プロジェクトの概要説明 |
+| Why | 目的と成功の定義 |
+| Who | 関係者と責任者 |
+| Constraints | 期限、予算、制約 |
+| Current State | 進捗、次のアクション、ブロッカー |
+| Decisions | 決定事項と理由の記録 |
+| Notes | 自由記述のメモ・気づき |
 
-### Universal Context Template
-
-All projects use the same 7-section template:
-
-| Section | Purpose |
-|---------|---------|
-| What | Brief description of the project |
-| Why | Goals and success criteria |
-| Who | Stakeholders and responsibilities |
-| Constraints | Deadlines, budget, limitations |
-| Current State | Progress, next actions, blockers |
-| Decisions | Decision log with rationale |
-| Notes | Free-form notes and insights |
-
-This standardized structure ensures:
-- Quick onboarding for any agent
-- Consistent information across all projects
-- Easy handoffs between Ashigaru workers
-
-### 🛠️ Skills
-
-Skills are not included in this repository by default.
-As you use the system, skill candidates will appear in `dashboard.md`.
-Review and approve them to grow your personal skill library.
-
-Skills can be invoked with `/skill-name`. Just tell the Shogun: "run `/skill-name`".
+この統一フォーマットにより：
+- どのエージェントでも素早くオンボーディング可能
+- すべてのプロジェクトで一貫した情報管理
+- 冒険者間の作業引き継ぎが容易
 
 ---
 
-## 🏛️ Design Philosophy
+### 🧠 モデル設定
 
-### Why Hierarchical Structure?
+| エージェント | モデル | 思考モード | 理由 |
+|-------------|--------|----------|------|
+| ギルドマスター | Opus | 無効 | 委譲と掲示板更新に深い推論は不要 |
+| 受付官 | デフォルト | 有効 | クエスト分配には慎重な判断が必要 |
+| 冒険者 | デフォルト | 有効 | 実装作業にはフル機能が必要 |
 
-The Shogun → Karo → Ashigaru hierarchy exists for:
-
-1. **Immediate Response**: Shogun delegates instantly and returns control to you
-2. **Parallel Execution**: Karo distributes to multiple Ashigaru simultaneously
-3. **Separation of Concerns**: Each role is clearly defined — Shogun decides "what", Karo decides "who"
-4. **Scalability**: Adding more Ashigaru doesn't break the structure
-5. **Fault Isolation**: One Ashigaru failing doesn't affect others
-6. **Centralized Reporting**: Only Shogun communicates with you, keeping information organized
-
-### Why YAML + send-keys?
-
-- **YAML files**: Structured communication that survives agent restarts and is human-readable for debugging
-- **send-keys**: Event-driven wakeups (no polling = no wasted API calls)
-- **No direct calls**: Agents can't interrupt each other or your input
-- **Conflict avoidance**: Each Ashigaru has dedicated files, preventing race conditions
-
-### Why Only Karo Updates Dashboard?
-
-- **Single responsibility**: One writer = no conflicts
-- **Information hub**: Karo receives all reports, knows the full picture
-- **Consistency**: All updates go through one quality gate
-- **No interruptions**: Prevents disrupting your input when Shogun would otherwise update the dashboard
-
-### How Skills Work
-
-Skills (`.claude/commands/`) are **not committed to this repository** by design.
-
-**Why?**
-- Each user's workflow is different
-- Skills should grow organically based on your needs
-- No one-size-fits-all solution
-
-**How to create new skills:**
-
-```
-Ashigaru notices a repeatable pattern during work
-    ↓
-Candidate appears in dashboard.md under "Skill Candidates"
-    ↓
-You (the Lord) review the candidate
-    ↓
-If approved, Karo creates the skill
-```
-
-Skills are **user-driven** — they only grow when you decide they're useful. Automatic growth would make them unmanageable, so only what you explicitly approve gets added.
+ギルドマスターは `MAX_THINKING_TOKENS=0` で拡張思考を無効化し、高レベルな判断にはOpusの能力を維持しつつ、レイテンシとコストを削減。
 
 ---
 
-## 🔌 MCP Setup Guide
+## 🎯 設計思想
 
-MCP (Model Context Protocol) servers extend Claude's capabilities. Here's how to set them up:
+### なぜ階層構造（ギルドマスター→受付官→冒険者）なのか
 
-### What is MCP?
+1. **即座の応答**: ギルドマスターは即座に委譲し、あなたに制御を返す
+2. **並列実行**: 受付官が複数の冒険者に同時分配
+3. **単一責任**: 各役割が明確に分離され、混乱しない
+4. **スケーラビリティ**: 冒険者を増やしても構造が崩れない
+5. **障害分離**: 1体の冒険者が失敗しても他に影響しない
+6. **依頼者への報告一元化**: ギルドマスターだけが依頼者とやり取りするため、情報が整理される
 
-MCP servers give Claude access to external tools:
-- **Notion MCP** → Read/write Notion pages
-- **GitHub MCP** → Create PRs, manage issues
-- **Memory MCP** → Remember things across sessions
+### なぜ YAML + send-keys なのか
 
-### Installing MCP Servers
+1. **進行状況の永続化**: YAMLファイルで構造化通信し、エージェント再起動にも耐える
+2. **ポーリング不要**: イベント駆動でAPIコストを削減
+3. **割り込み防止**: エージェント同士やあなたの入力への割り込みを防止
+4. **デバッグ容易**: 依頼者がYAMLを直接読んで状況把握できる
+5. **競合回避**: 各冒険者に専用ファイルを割り当て
 
-Run these commands to add MCP servers:
+### なぜクエスト掲示板（dashboard.md）は受付官のみが更新するのか
+
+1. **単一更新者**: 競合を防ぐため、更新責任者を1人に限定
+2. **情報集約**: 受付官は全冒険者の報告を受ける立場なので全体像を把握
+3. **一貫性**: すべての更新が1つの品質ゲートを通過
+4. **割り込み防止**: ギルドマスターが更新すると、依頼者の入力中に割り込む恐れあり
+
+---
+
+## 🛠️ スキル
+
+初期状態ではスキルはありません。
+運用中はクエスト掲示板（dashboard.md）の「スキル化候補」から承認して増やしていきます。
+
+スキルは `/スキル名` で呼び出し可能。ギルドマスターに「/スキル名 を実行」と伝えるだけ。
+
+### スキルの思想
+
+**1. スキルはコミット対象外**
+
+`.claude/commands/` 配下のスキルはリポジトリにコミットしない設計。理由：
+- 各ユーザの業務・ワークフローは異なる
+- 汎用的なスキルを押し付けるのではなく、ユーザが自分に必要なスキルを育てていく
+
+**2. スキル取得の手順**
+
+```
+冒険者が作業中にパターンを発見
+    ↓
+クエスト掲示板（dashboard.md）の「スキル化候補」に上がる
+    ↓
+依頼者（あなた）が内容を確認
+    ↓
+承認すれば受付官に指示してスキルを作成
+```
+
+スキルはユーザ主導で増やすもの。自動で増えると管理不能になるため、「これは便利」と判断したものだけを残す。
+
+---
+
+## 🔌 MCPセットアップガイド
+
+MCP（Model Context Protocol）サーバはClaudeの機能を拡張します。セットアップ方法：
+
+### MCPとは？
+
+MCPサーバはClaudeに外部ツールへのアクセスを提供します：
+- **Notion MCP** → Notionページの読み書き
+- **GitHub MCP** → PR作成、Issue管理
+- **Memory MCP** → セッション間で記憶を保持
+
+### MCPサーバのインストール
+
+以下のコマンドでMCPサーバを追加：
 
 ```bash
-# 1. Notion - Connect to your Notion workspace
+# 1. Notion - Notionワークスペースに接続
 claude mcp add notion -e NOTION_TOKEN=your_token_here -- npx -y @notionhq/notion-mcp-server
 
-# 2. Playwright - Browser automation
+# 2. Playwright - ブラウザ自動化
 claude mcp add playwright -- npx @playwright/mcp@latest
-# Note: Run `npx playwright install chromium` first
+# 注意: 先に `npx playwright install chromium` を実行してください
 
-# 3. GitHub - Repository operations
+# 3. GitHub - リポジトリ操作
 claude mcp add github -e GITHUB_PERSONAL_ACCESS_TOKEN=your_pat_here -- npx -y @modelcontextprotocol/server-github
 
-# 4. Sequential Thinking - Step-by-step reasoning for complex problems
+# 4. Sequential Thinking - 複雑な問題を段階的に思考
 claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequential-thinking
 
-# 5. Memory - Long-term memory across sessions (Recommended!)
-# ✅ Automatically configured by first_setup.sh
-# To reconfigure manually:
-claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/shogun_memory.jsonl" -- npx -y @modelcontextprotocol/server-memory
+# 5. Memory - セッション間の長期記憶（推奨！）
+# ✅ first_setup.sh で自動設定済み
+# 手動で再設定する場合:
+claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/guildmaster_memory.jsonl" -- npx -y @modelcontextprotocol/server-memory
 ```
 
-### Verify Installation
+### インストール確認
 
 ```bash
 claude mcp list
 ```
 
-You should see all servers with "Connected" status.
+全サーバが「Connected」と表示されるはずです。
 
 ---
 
-## 🌍 Real-World Use Cases
+## 🌍 実用例
 
-### Example 1: Research Task
-
-```
-You: "Research the top 5 AI coding assistants and compare them"
-
-What happens:
-1. Shogun delegates to Karo
-2. Karo assigns:
-   - Ashigaru 1: Research GitHub Copilot
-   - Ashigaru 2: Research Cursor
-   - Ashigaru 3: Research Claude Code
-   - Ashigaru 4: Research Codeium
-   - Ashigaru 5: Research Amazon CodeWhisperer
-3. All 5 research simultaneously
-4. Results compiled in dashboard.md
-```
-
-### Example 2: PoC Preparation
+### 例1: 調査クエスト
 
 ```
-You: "Prepare a PoC for the project in this Notion page: [URL]"
+あなた: 「AIコーディングアシスタント上位5つを調査して比較せよ」
 
-What happens:
-1. Karo fetches Notion content via MCP
-2. Ashigaru 2: Lists items to clarify
-3. Ashigaru 3: Researches technical feasibility
-4. Ashigaru 4: Creates PoC plan document
-5. All results in dashboard.md, ready for your meeting
+実行される処理:
+1. ギルドマスターが受付官に委譲
+2. 受付官が割り当て:
+   - 冒険者1: GitHub Copilotを調査
+   - 冒険者2: Cursorを調査
+   - 冒険者3: Claude Codeを調査
+   - 冒険者4: Codeiumを調査
+   - 冒険者5: Amazon CodeWhispererを調査
+3. 5体が同時に調査
+4. 報告がクエスト掲示板（dashboard.md）に集約
+```
+
+### 例2: PoC準備
+
+```
+あなた: 「このNotionページのプロジェクトでPoC準備: [URL]」
+
+実行される処理:
+1. 受付官がMCP経由でNotionコンテンツを取得
+2. 冒険者2: 確認すべき項目をリスト化
+3. 冒険者3: 技術的な実現可能性を調査
+4. 冒険者4: PoC計画書を作成
+5. 全報告がクエスト掲示板（dashboard.md）に集約、会議の準備完了
 ```
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 設定
 
-### Language Setting
+### 言語設定
 
-Edit `config/settings.yaml`:
+`config/settings.yaml` を編集：
 
 ```yaml
-language: ja   # Japanese only
-language: en   # Japanese + English translation
+language: ja   # 日本語のみ
+language: en   # 日本語 + 英訳併記
 ```
 
 ---
 
-## 🛠️ Advanced Usage
+## 🛠️ 上級者向け
 
 <details>
-<summary><b>Script Architecture</b> (Click to expand)</summary>
+<summary><b>スクリプトアーキテクチャ</b>（クリックで展開）</summary>
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
-│                      FIRST-TIME SETUP (Run Once)                    │
+│                      初回セットアップ（1回だけ実行）                   │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  install.bat (Windows)                                              │
 │      │                                                              │
-│      ├── Check/Install WSL2                                         │
-│      └── Check/Install Ubuntu                                       │
+│      ├── WSL2のチェック/インストール案内                              │
+│      └── Ubuntuのチェック/インストール案内                            │
 │                                                                     │
-│  first_setup.sh (run manually in Ubuntu/WSL)                        │
+│  first_setup.sh (Ubuntu/WSLで手動実行)                               │
 │      │                                                              │
-│      ├── Check/Install tmux                                         │
-│      ├── Check/Install Node.js v20+ (via nvm)                      │
-│      ├── Check/Install Claude Code CLI                              │
-│      └── Configure Memory MCP server                                │
+│      ├── tmuxのチェック/インストール                                  │
+│      ├── Node.js v20+のチェック/インストール (nvm経由)                │
+│      ├── Claude Code CLIのチェック/インストール                      │
+│      └── Memory MCPサーバー設定                                      │
 │                                                                     │
 ├─────────────────────────────────────────────────────────────────────┤
-│                      DAILY STARTUP (Run Every Day)                  │
+│                      毎日の起動（毎日実行）                           │
 ├─────────────────────────────────────────────────────────────────────┤
 │                                                                     │
 │  shutsujin_departure.sh                                             │
 │      │                                                              │
-│      ├──▶ Create tmux sessions                                      │
-│      │         • "shogun" session (1 pane)                          │
-│      │         • "multiagent" session (9 panes, 3x3 grid)           │
+│      ├──▶ tmuxセッションを作成                                       │
+│      │         • "guildmaster"セッション（1ペイン）                        │
+│      │         • "multiagent"セッション（9ペイン、3x3グリッド）        │
 │      │                                                              │
-│      ├──▶ Reset queue files and dashboard                           │
+│      ├──▶ キューファイルと掲示板をリセット                             │
 │      │                                                              │
-│      └──▶ Launch Claude Code on all agents                          │
+│      └──▶ 全エージェントでClaude Codeを起動                          │
 │                                                                     │
 └─────────────────────────────────────────────────────────────────────┘
 ```
@@ -587,21 +606,21 @@ language: en   # Japanese + English translation
 </details>
 
 <details>
-<summary><b>shutsujin_departure.sh Options</b> (Click to expand)</summary>
+<summary><b>shutsujin_departure.sh オプション</b>（クリックで展開）</summary>
 
 ```bash
-# Default: Full startup (tmux sessions + Claude Code launch)
+# デフォルト: フル起動（tmuxセッション + Claude Code起動）
 ./shutsujin_departure.sh
 
-# Session setup only (without launching Claude Code)
+# セッションセットアップのみ（Claude Code起動なし）
 ./shutsujin_departure.sh -s
 ./shutsujin_departure.sh --setup-only
 
-# Full startup + open Windows Terminal tabs
+# フル起動 + Windows Terminalタブを開く
 ./shutsujin_departure.sh -t
 ./shutsujin_departure.sh --terminal
 
-# Show help
+# ヘルプを表示
 ./shutsujin_departure.sh -h
 ./shutsujin_departure.sh --help
 ```
@@ -609,155 +628,155 @@ language: en   # Japanese + English translation
 </details>
 
 <details>
-<summary><b>Common Workflows</b> (Click to expand)</summary>
+<summary><b>よく使うワークフロー</b>（クリックで展開）</summary>
 
-**Normal Daily Usage:**
+**通常の毎日の使用：**
 ```bash
-./shutsujin_departure.sh          # Start everything
-tmux attach-session -t shogun     # Connect to give commands
+./shutsujin_departure.sh          # 全て起動
+tmux attach-session -t guildmaster     # 接続して依頼を出す
 ```
 
-**Debug Mode (manual control):**
+**デバッグモード（手動制御）：**
 ```bash
-./shutsujin_departure.sh -s       # Create sessions only
+./shutsujin_departure.sh -s       # セッションのみ作成
 
-# Manually start Claude Code on specific agents
-tmux send-keys -t shogun:0 'claude --dangerously-skip-permissions' Enter
+# 特定のエージェントでClaude Codeを手動起動
+tmux send-keys -t guildmaster:0 'claude --dangerously-skip-permissions' Enter
 tmux send-keys -t multiagent:0.0 'claude --dangerously-skip-permissions' Enter
 ```
 
-**Restart After Crash:**
+**クラッシュ後の再起動：**
 ```bash
-# Kill existing sessions
-tmux kill-session -t shogun
+# 既存セッションを終了
+tmux kill-session -t guildmaster
 tmux kill-session -t multiagent
 
-# Start fresh
+# 新しく起動
 ./shutsujin_departure.sh
 ```
 
 </details>
 
 <details>
-<summary><b>Convenient Aliases</b> (Click to expand)</summary>
+<summary><b>便利なエイリアス</b>（クリックで展開）</summary>
 
-Running `first_setup.sh` automatically adds these aliases to `~/.bashrc`:
+`first_setup.sh` を実行すると、以下のエイリアスが `~/.bashrc` に自動追加されます：
 
 ```bash
-alias css='cd /mnt/c/tools/multi-agent-shogun && ./shutsujin_departure.sh'  # Setup + deploy
-alias csm='cd /mnt/c/tools/multi-agent-shogun'                              # Navigate to directory only
+alias css='tmux attach-session -t guildmaster'      # ギルドマスターウィンドウの起動
+alias csm='tmux attach-session -t multiagent'  # 受付官・冒険者ウィンドウの起動
 ```
 
-*To apply aliases, run `source ~/.bashrc` or restart your terminal. On WSL, run `wsl --shutdown` in PowerShell first — simply closing the window does not terminate WSL.*
+※ エイリアスを反映するには `source ~/.bashrc` を実行するか、PowerShellで `wsl --shutdown` してからターミナルを開き直してください。
 
 </details>
 
 ---
 
-## 📁 File Structure
+## 📁 ファイル構成
 
 <details>
-<summary><b>Click to expand file structure</b></summary>
+<summary><b>クリックでファイル構成を展開</b></summary>
 
 ```
-multi-agent-shogun/
+multi-agent-guild/
 │
-│  ┌─────────────────── SETUP SCRIPTS ───────────────────┐
-├── install.bat               # Windows: First-time setup
-├── first_setup.sh            # Ubuntu/Mac: First-time setup
-├── shutsujin_departure.sh    # Daily startup (auto-loads instructions)
-│  └────────────────────────────────────────────────────┘
+│  ┌─────────────────── セットアップスクリプト ───────────────────┐
+├── install.bat               # Windows: 初回セットアップ
+├── first_setup.sh            # Ubuntu/Mac: 初回セットアップ
+├── shutsujin_departure.sh    # 毎日の起動（指示書自動読み込み）
+│  └────────────────────────────────────────────────────────────┘
 │
-├── instructions/             # Agent instruction files
-│   ├── shogun.md             # Commander instructions
-│   ├── karo.md               # Manager instructions
-│   └── ashigaru.md           # Worker instructions
+├── instructions/             # エージェント指示書
+│   ├── guildmaster.md             # ギルドマスターの指示書
+│   ├── receptionist.md               # 受付官の指示書
+│   └── adventurer.md           # 冒険者の指示書
 │
 ├── config/
-│   └── settings.yaml         # Language and other settings
+│   └── settings.yaml         # 言語その他の設定
 │
-├── projects/                # Project details (git-ignored, contains client data)
-│   └── <project_id>.yaml   # Full project info (client, tasks, Notion links, etc.)
+├── projects/                # プロジェクト詳細（git対象外、機密情報含む）
+│   └── <project_id>.yaml   # 各プロジェクトの全情報（クライアント、クエスト、Notion連携等）
 │
-├── queue/                    # Communication files
-│   ├── shogun_to_karo.yaml   # Commands from Shogun to Karo
-│   ├── tasks/                # Individual worker task files
-│   └── reports/              # Worker reports
+├── queue/                    # 通信ファイル
+│   ├── guildmaster_to_receptionist.yaml   # ギルドマスターから受付官への依頼
+│   ├── tasks/                # 各クエストファイル
+│   └── reports/              # 冒険者レポート
 │
-├── memory/                   # Memory MCP storage
-├── dashboard.md              # Real-time status overview
-└── CLAUDE.md                 # Project context for Claude
+├── memory/                   # Memory MCP保存場所
+├── dashboard.md              # クエスト掲示板（リアルタイム進行状況）
+└── CLAUDE.md                 # Claude用プロジェクトコンテキスト
 ```
 
 </details>
 
 ---
 
-## 📂 Project Management
+## 📂 プロジェクト管理
 
-This system manages **all white-collar tasks**, not just its own development. Projects can live anywhere on your filesystem — they don't need to be inside this repository.
+このシステムは自身の開発だけでなく、**全てのホワイトカラー業務**を管理・実行する。プロジェクトのフォルダはこのリポジトリの外にあってもよい。
 
-### How It Works
+### 仕組み
 
 ```
-config/projects.yaml          # Project registry (ID, name, path, status)
-projects/<project_id>.yaml    # Full project details (client info, tasks, Notion links, etc.)
+config/projects.yaml          # プロジェクト一覧（ID・名前・パス・進行状況のみ）
+projects/<project_id>.yaml    # 各プロジェクトの詳細情報
 ```
 
-- **`config/projects.yaml`**: Lists all projects with basic metadata (ID, name, path, status)
-- **`projects/<id>.yaml`**: Contains full details for each project (client info, contract, tasks, related files, Notion pages, etc.)
-- **Project files** (source code, docs, etc.) live at the `path` specified in the project entry — anywhere on the filesystem
-- **`projects/` is git-ignored** because it may contain confidential client information
+- **`config/projects.yaml`**: どのプロジェクトがあるかの一覧（サマリのみ）
+- **`projects/<id>.yaml`**: そのプロジェクトの全詳細（クライアント情報、契約、クエスト、関連ファイル、Notionページ等）
+- **プロジェクトの実ファイル**（ソースコード、設計書等）は `path` で指定した外部フォルダに配置
+- **`projects/` はGit追跡対象外**（クライアントの機密情報を含むため）
 
-### Example
+### 例
 
 ```yaml
 # config/projects.yaml
 projects:
   - id: my_client
-    name: "Client X Consulting"
+    name: "クライアントXコンサルティング"
     path: "/mnt/c/Consulting/client_x"
-    status: active
+    progress: active
 
 # projects/my_client.yaml
 id: my_client
 client:
-  name: "Client X"
-  company: "X Corp"
+  name: "クライアントX"
+  company: "X株式会社"
 contract:
-  fee: "monthly"
-current_tasks:
-  - id: task_001
-    name: "System architecture review"
-    status: in_progress
+  fee: "月額"
+current_quests:
+  - id: quest_001
+    name: "システムアーキテクチャレビュー"
+    progress: in_progress
 ```
 
-This separation allows the Shogun system to orchestrate tasks across multiple external projects while keeping project details private and out of version control.
+この分離設計により、ギルドマスターシステムは複数の外部プロジェクトを横断的に統率しつつ、プロジェクトの詳細情報はバージョン管理の対象外に保つことができる。
 
 ---
 
-## 🔧 Troubleshooting
+## 🔧 トラブルシューティング
 
 <details>
-<summary><b>MCP tools not working?</b></summary>
+<summary><b>MCPツールが動作しない？</b></summary>
 
-MCP tools are "deferred" and need to be loaded first:
+MCPツールは「遅延ロード」方式で、最初にロードが必要です：
 
 ```
-# Wrong - tool not loaded
-mcp__memory__read_graph()  ← Error!
+# 間違い - ツールがロードされていない
+mcp__memory__read_graph()  ← エラー！
 
-# Correct - load first
+# 正しい - 先にロード
 ToolSearch("select:mcp__memory__read_graph")
-mcp__memory__read_graph()  ← Works!
+mcp__memory__read_graph()  ← 動作！
 ```
 
 </details>
 
 <details>
-<summary><b>Agents asking for permissions?</b></summary>
+<summary><b>エージェントが権限を求めてくる？</b></summary>
 
-Make sure to start with `--dangerously-skip-permissions`:
+`--dangerously-skip-permissions` 付きで起動していることを確認：
 
 ```bash
 claude --dangerously-skip-permissions --system-prompt "..."
@@ -766,57 +785,57 @@ claude --dangerously-skip-permissions --system-prompt "..."
 </details>
 
 <details>
-<summary><b>Workers stuck?</b></summary>
+<summary><b>冒険者が停止している？</b></summary>
 
-Check the worker's pane:
+冒険者のペインを確認：
 ```bash
 tmux attach-session -t multiagent
-# Use Ctrl+B then number to switch panes
+# Ctrl+B の後に数字でペインを切り替え
 ```
 
 </details>
 
 ---
 
-## 📚 tmux Quick Reference
+## 📚 tmux クイックリファレンス
 
-| Command | Description |
-|---------|-------------|
-| `tmux attach -t shogun` | Connect to Shogun |
-| `tmux attach -t multiagent` | Connect to workers |
-| `Ctrl+B` then `0-8` | Switch between panes |
-| `Ctrl+B` then `d` | Detach (leave running) |
-| `tmux kill-session -t shogun` | Stop Shogun session |
-| `tmux kill-session -t multiagent` | Stop worker sessions |
+| コマンド | 説明 |
+|----------|------|
+| `tmux attach -t guildmaster` | ギルドマスターに接続 |
+| `tmux attach -t multiagent` | 冒険者に接続 |
+| `Ctrl+B` の後 `0-8` | ペイン間を切り替え |
+| `Ctrl+B` の後 `d` | デタッチ（実行継続） |
+| `tmux kill-session -t guildmaster` | ギルドマスターセッションを停止 |
+| `tmux kill-session -t multiagent` | 冒険者セッションを停止 |
 
-### 🖱️ Mouse Support
+### 🖱️ マウス操作
 
-`first_setup.sh` automatically configures tmux mouse support (`set -g mouse on` in `~/.tmux.conf`). This enables the following mouse operations:
+`first_setup.sh` が `~/.tmux.conf` に `set -g mouse on` を自動設定するため、マウスによる直感的な操作が可能です：
 
-| Action | Description |
-|--------|-------------|
-| Scroll wheel | Scroll within a pane |
-| Click on a pane | Switch focus between panes |
-| Drag pane border | Resize panes |
+| 操作 | 説明 |
+|------|------|
+| マウスホイール | ペイン内のスクロール（出力履歴の確認） |
+| ペインをクリック | ペイン間のフォーカス切替 |
+| ペイン境界をドラッグ | ペインのリサイズ |
 
-> **Note:** If you set up tmux manually (without `first_setup.sh`), add `set -g mouse on` to your `~/.tmux.conf` to enable mouse support.
-
----
-
-## 🙏 Credits
-
-Based on [Claude-Code-Communication](https://github.com/Akira-Papa/Claude-Code-Communication) by Akira-Papa.
+キーボード操作に不慣れな場合でも、マウスだけでペインの切替・スクロール・リサイズが行えます。
 
 ---
 
-## 📄 License
+## 🙏 クレジット
 
-MIT License - See [LICENSE](LICENSE) for details.
+[Claude-Code-Communication](https://github.com/Akira-Papa/Claude-Code-Communication) by Akira-Papa をベースに開発。
+
+---
+
+## 📄 ライセンス
+
+MIT License - 詳細は [LICENSE](LICENSE) を参照。
 
 ---
 
 <div align="center">
 
-**Command your AI army. Build faster.**
+**AIの軍勢を統率せよ。より速く構築せよ。**
 
 </div>
