@@ -309,6 +309,22 @@ You: Submit request → Guildmaster: Delegates → You: Can submit the next requ
 
 You never have to wait for long quests to complete.
 
+---
+
+## 🎮 Unity Guild Specialization
+
+This guild is optimized for Unity game development. Standard Unity skills live in:
+
+- `skills/unity-adventurer-skills/`
+
+Adventurers pick specialized classes (Unity engineer, AI designer, UI/UX, optimization, QA) to match each quest. Skill definitions include purpose, expected input/output, and recommended model profile.
+
+### Model Selection (Unity)
+
+- **Design/Architecture/Root-cause analysis** → reasoning-focused model
+- **C# implementation/Unity API work** → code-focused model
+- **Summaries/checklists** → fast model
+
 ### 🧠 3. Memory Across Sessions (Memory MCP)
 
 The AI remembers your preferences:

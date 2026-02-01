@@ -11,6 +11,9 @@ test_output/
 
 # Generated skills (local development)
 skills/
+!skills/
+!skills/unity-adventurer-skills/
+!skills/unity-adventurer-skills/**
 
 # Temporary files
 *.tmp
