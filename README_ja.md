@@ -1,10 +1,10 @@
-# multi-agent-shogun
+# multi-agent-guild
 
 <div align="center">
 
-**Claude Code マルチエージェント統率システム**
+**Claude Code 冒険者ギルド運営システム**
 
-*コマンド1つで、8体のAIエージェントが並列稼働*
+*依頼書1つで、8体のAIエージェントが並列稼働*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blueviolet)](https://claude.ai)
@@ -18,30 +18,32 @@
 
 ## これは何？
 
-**multi-agent-shogun** は、複数の Claude Code インスタンスを同時に実行し、戦国時代の軍制のように統率するシステムです。
+**multi-agent-guild** は、複数の Claude Code インスタンスを同時に実行し、冒険者ギルドの運営構造として統率するシステムです。
 
 **なぜ使うのか？**
-- 1つの命令で、8体のAIワーカーが並列で実行
-- 待ち時間なし - タスクがバックグラウンドで実行中も次の命令を出せる
+- 1つの依頼で、8体の冒険者が並列で実行
+- 待ち時間なし - クエストがバックグラウンドで進行中も次の依頼を出せる
 - AIがセッションを跨いであなたの好みを記憶（Memory MCP）
-- ダッシュボードでリアルタイム進捗確認
+- クエスト掲示板（dashboard.md）でリアルタイム進行確認
+
+**ギルドの流れ:** 依頼 → クエスト → 冒険 → 報告
 
 ```
-      あなた（上様）
+      あなた（依頼者）
            │
-           ▼ 命令を出す
+           ▼ 依頼書を提出
     ┌─────────────┐
-    │   SHOGUN    │  ← 命令を受け取り、即座に委譲
+    │   GUILDMASTER    │  ← 依頼を受け取り、即座に委譲
     └──────┬──────┘
            │ YAMLファイル + tmux
     ┌──────▼──────┐
-    │    KARO     │  ← タスクをワーカーに分配
+    │    RECEPTIONIST     │  ← クエストを分解し配分
     └──────┬──────┘
            │
   ┌─┬─┬─┬─┴─┬─┬─┬─┐
-  │1│2│3│4│5│6│7│8│  ← 8体のワーカーが並列実行
+  │1│2│3│4│5│6│7│8│  ← 8体の冒険者が並列実行
   └─┴─┴─┴─┴─┴─┴─┴─┘
-      ASHIGARU
+      ADVENTURERS
 ```
 
 ---
@@ -61,9 +63,9 @@
 
 📥 **リポジトリをダウンロード**
 
-[ZIPダウンロード](https://github.com/yohey-w/multi-agent-shogun/archive/refs/heads/main.zip) して `C:\tools\multi-agent-shogun` に展開
+[ZIPダウンロード](https://github.com/yohey-w/multi-agent-guild/archive/refs/heads/main.zip) して `C:\tools\multi-agent-guild` に展開
 
-*または git を使用:* `git clone https://github.com/yohey-w/multi-agent-shogun.git C:\tools\multi-agent-shogun`
+*または git を使用:* `git clone https://github.com/yohey-w/multi-agent-guild.git C:\tools\multi-agent-guild`
 
 </td>
 </tr>
@@ -92,7 +94,7 @@
 🐧 **Ubuntu を開いて以下を実行**（初回のみ）
 
 ```bash
-cd /mnt/c/tools/multi-agent-shogun
+cd /mnt/c/tools/multi-agent-guild
 ./first_setup.sh
 ```
 
@@ -106,7 +108,7 @@ cd /mnt/c/tools/multi-agent-shogun
 </td>
 <td>
 
-✅ **出陣！**
+✅ **出発！**
 
 ```bash
 ./shutsujin_departure.sh
@@ -121,7 +123,7 @@ cd /mnt/c/tools/multi-agent-shogun
 **Ubuntuターミナル**（WSL）を開いて実行：
 
 ```bash
-cd /mnt/c/tools/multi-agent-shogun
+cd /mnt/c/tools/multi-agent-guild
 ./shutsujin_departure.sh
 ```
 
@@ -134,8 +136,8 @@ cd /mnt/c/tools/multi-agent-shogun
 
 ```bash
 # 1. リポジトリをクローン
-git clone https://github.com/yohey-w/multi-agent-shogun.git ~/multi-agent-shogun
-cd ~/multi-agent-shogun
+git clone https://github.com/yohey-w/multi-agent-guild.git ~/multi-agent-guild
+cd ~/multi-agent-guild
 
 # 2. スクリプトに実行権限を付与
 chmod +x *.sh
@@ -147,7 +149,7 @@ chmod +x *.sh
 ### 毎日の起動
 
 ```bash
-cd ~/multi-agent-shogun
+cd ~/multi-agent-guild
 ./shutsujin_departure.sh
 ```
 
@@ -195,12 +197,12 @@ wsl --install
 - ✅ 次のステップ（`first_setup.sh` の実行方法）を案内
 
 ### `shutsujin_departure.sh` が行うこと：
-- ✅ tmuxセッションを作成（shogun + multiagent）
+- ✅ tmuxセッションを作成（guildmaster + multiagent）
 - ✅ 全エージェントでClaude Codeを起動
 - ✅ 各エージェントに指示書を自動読み込み
 - ✅ キューファイルをリセットして新しい状態に
 
-**実行後、全エージェントが即座にコマンドを受け付ける準備完了！**
+**実行後、全エージェントが即座に依頼を受け付ける準備完了！**
 
 </details>
 
@@ -229,54 +231,54 @@ wsl --install
 
 | エージェント | 役割 | 数 |
 |-------------|------|-----|
-| 🏯 将軍（Shogun） | 総大将 - あなたの命令を受ける | 1 |
-| 📋 家老（Karo） | 管理者 - タスクを分配 | 1 |
-| ⚔️ 足軽（Ashigaru） | ワーカー - 並列でタスク実行 | 8 |
+| 🛡️ ギルドマスター（Guildmaster） | 依頼統括 - 依頼を受け取る | 1 |
+| 📋 受付官（Receptionist） | 上級冒険者 - クエストを分解しミッションを割当 | 1 |
+| ⚔️ 冒険者（Adventurer） | 冒険者 - 並列でクエスト実行 | 8 |
 
 tmuxセッションが作成されます：
-- `shogun` - ここに接続してコマンドを出す
-- `multiagent` - ワーカーがバックグラウンドで稼働
+- `guildmaster` - ここに接続して依頼を出す
+- `multiagent` - 冒険者がバックグラウンドで稼働
 
 ---
 
 ## 📖 基本的な使い方
 
-### Step 1: 将軍に接続
+### Step 1: ギルドマスターに接続
 
 `shutsujin_departure.sh` 実行後、全エージェントが自動的に指示書を読み込み、作業準備完了となります。
 
-新しいターミナルを開いて将軍に接続：
+新しいターミナルを開いてギルドマスターに接続：
 
 ```bash
-tmux attach-session -t shogun
+tmux attach-session -t guildmaster
 ```
 
-### Step 2: 最初の命令を出す
+### Step 2: 最初の依頼を出す
 
-将軍は既に初期化済み！そのまま命令を出せます：
+ギルドマスターは既に初期化済み！そのまま依頼を出せます：
 
 ```
 JavaScriptフレームワーク上位5つを調査して比較表を作成せよ
 ```
 
-将軍は：
-1. タスクをYAMLファイルに書き込む
-2. 家老（管理者）に通知
+ギルドマスターは：
+1. クエストをYAMLファイルに書き込む
+2. 受付官（受付担当）に通知
 3. 即座にあなたに制御を返す（待つ必要なし！）
 
-その間、家老はタスクを足軽ワーカーに分配し、並列実行します。
+その間、受付官はクエストを冒険者に分配し、並列実行します。
 
 ### Step 3: 進捗を確認
 
-エディタで `dashboard.md` を開いてリアルタイム状況を確認：
+エディタでクエスト掲示板（`dashboard.md`）を開いてリアルタイム状況を確認：
 
 ```markdown
 ## 進行中
-| ワーカー | タスク | 状態 |
+| 冒険者 | クエスト | 進行状況 |
 |----------|--------|------|
-| 足軽 1 | React調査 | 実行中 |
-| 足軽 2 | Vue調査 | 実行中 |
-| 足軽 3 | Angular調査 | 完了 |
+| 冒険者 1 | React調査 | 実行中 |
+| 冒険者 2 | Vue調査 | 実行中 |
+| 冒険者 3 | Angular調査 | 完了 |
 ```
 
 ---
@@ -285,27 +287,27 @@ JavaScriptフレームワーク上位5つを調査して比較表を作成せよ
 
 ### ⚡ 1. 並列実行
 
-1つの命令で最大8つの並列タスクを生成：
+1つの依頼で最大8つの並列クエストを生成：
 
 ```
 あなた: 「5つのMCPサーバを調査せよ」
-→ 5体の足軽が同時に調査開始
-→ 数時間ではなく数分で結果が出る
+→ 5体の冒険者が同時に調査開始
+→ 数時間ではなく数分で報告が届く
 ```
 
 ### 🔄 2. ノンブロッキングワークフロー
 
-将軍は即座に委譲して、あなたに制御を返します：
+ギルドマスターは即座に委譲して、あなたに制御を返します：
 
 ```
-あなた: 命令 → 将軍: 委譲 → あなた: 次の命令をすぐ出せる
+あなた: 依頼 → ギルドマスター: 委譲 → あなた: 次の依頼をすぐ出せる
                                     ↓
-                    ワーカー: バックグラウンドで実行
+                    冒険者: バックグラウンドで実行
                                     ↓
-                    ダッシュボード: 結果を表示
+                    掲示板: 報告を表示
 ```
 
-長いタスクの完了を待つ必要はありません。
+長いクエストの完了を待つ必要はありません。
 
 ### 🧠 3. セッション間記憶（Memory MCP）
 
@@ -333,7 +335,7 @@ VSCode拡張のClaude Codeはスクショを貼り付けて事象を説明でき
 screenshot:
   path: "/mnt/c/Users/あなたの名前/Pictures/Screenshots"
 
-# 将軍に伝えるだけ:
+# ギルドマスターに伝えるだけ:
 あなた: 「最新のスクショを見ろ」
 あなた: 「スクショ2枚見ろ」
 → AIが即座にスクリーンショットを読み取って分析
@@ -352,12 +354,12 @@ screenshot:
 
 | レイヤー | 場所 | 用途 |
 |---------|------|------|
-| Memory MCP | `memory/shogun_memory.jsonl` | セッションを跨ぐ長期記憶 |
-| グローバル | `memory/global_context.md` | システム全体の設定、殿の好み |
+| Memory MCP | `memory/guildmaster_memory.jsonl` | セッションを跨ぐ長期記憶 |
+| グローバル | `memory/global_context.md` | システム全体の設定、依頼者の好み |
 | プロジェクト | `context/{project}.md` | プロジェクト固有の知見 |
 
 この設計により：
-- どの足軽でも任意のプロジェクトを担当可能
+- どの冒険者でも任意のプロジェクトを担当可能
 - エージェント切り替え時もコンテキスト継続
 - 関心の分離が明確
 - セッション間の知識永続化
@@ -379,7 +381,7 @@ screenshot:
 この統一フォーマットにより：
 - どのエージェントでも素早くオンボーディング可能
 - すべてのプロジェクトで一貫した情報管理
-- 足軽間の作業引き継ぎが容易
+- 冒険者間の作業引き継ぎが容易
 
 ---
 
@@ -387,48 +389,48 @@ screenshot:
 
 | エージェント | モデル | 思考モード | 理由 |
 |-------------|--------|----------|------|
-| 将軍 | Opus | 無効 | 委譲とダッシュボード更新に深い推論は不要 |
-| 家老 | デフォルト | 有効 | タスク分配には慎重な判断が必要 |
-| 足軽 | デフォルト | 有効 | 実装作業にはフル機能が必要 |
+| ギルドマスター | Opus | 無効 | 委譲と掲示板更新に深い推論は不要 |
+| 受付官 | デフォルト | 有効 | クエスト分配には慎重な判断が必要 |
+| 冒険者 | デフォルト | 有効 | 実装作業にはフル機能が必要 |
 
-将軍は `MAX_THINKING_TOKENS=0` で拡張思考を無効化し、高レベルな判断にはOpusの能力を維持しつつ、レイテンシとコストを削減。
+ギルドマスターは `MAX_THINKING_TOKENS=0` で拡張思考を無効化し、高レベルな判断にはOpusの能力を維持しつつ、レイテンシとコストを削減。
 
 ---
 
 ## 🎯 設計思想
 
-### なぜ階層構造（将軍→家老→足軽）なのか
+### なぜ階層構造（ギルドマスター→受付官→冒険者）なのか
 
-1. **即座の応答**: 将軍は即座に委譲し、あなたに制御を返す
-2. **並列実行**: 家老が複数の足軽に同時分配
+1. **即座の応答**: ギルドマスターは即座に委譲し、あなたに制御を返す
+2. **並列実行**: 受付官が複数の冒険者に同時分配
 3. **単一責任**: 各役割が明確に分離され、混乱しない
-4. **スケーラビリティ**: 足軽を増やしても構造が崩れない
-5. **障害分離**: 1体の足軽が失敗しても他に影響しない
-6. **人間への報告一元化**: 将軍だけが人間とやり取りするため、情報が整理される
+4. **スケーラビリティ**: 冒険者を増やしても構造が崩れない
+5. **障害分離**: 1体の冒険者が失敗しても他に影響しない
+6. **依頼者への報告一元化**: ギルドマスターだけが依頼者とやり取りするため、情報が整理される
 
 ### なぜ YAML + send-keys なのか
 
-1. **状態の永続化**: YAMLファイルで構造化通信し、エージェント再起動にも耐える
+1. **進行状況の永続化**: YAMLファイルで構造化通信し、エージェント再起動にも耐える
 2. **ポーリング不要**: イベント駆動でAPIコストを削減
 3. **割り込み防止**: エージェント同士やあなたの入力への割り込みを防止
-4. **デバッグ容易**: 人間がYAMLを直接読んで状況把握できる
-5. **競合回避**: 各足軽に専用ファイルを割り当て
+4. **デバッグ容易**: 依頼者がYAMLを直接読んで状況把握できる
+5. **競合回避**: 各冒険者に専用ファイルを割り当て
 
-### なぜ dashboard.md は家老のみが更新するのか
+### なぜクエスト掲示板（dashboard.md）は受付官のみが更新するのか
 
 1. **単一更新者**: 競合を防ぐため、更新責任者を1人に限定
-2. **情報集約**: 家老は全足軽の報告を受ける立場なので全体像を把握
+2. **情報集約**: 受付官は全冒険者の報告を受ける立場なので全体像を把握
 3. **一貫性**: すべての更新が1つの品質ゲートを通過
-4. **割り込み防止**: 将軍が更新すると、殿の入力中に割り込む恐れあり
+4. **割り込み防止**: ギルドマスターが更新すると、依頼者の入力中に割り込む恐れあり
 
 ---
 
 ## 🛠️ スキル
 
 初期状態ではスキルはありません。
-運用中にダッシュボード（dashboard.md）の「スキル化候補」から承認して増やしていきます。
+運用中はクエスト掲示板（dashboard.md）の「スキル化候補」から承認して増やしていきます。
 
-スキルは `/スキル名` で呼び出し可能。将軍に「/スキル名 を実行」と伝えるだけ。
+スキルは `/スキル名` で呼び出し可能。ギルドマスターに「/スキル名 を実行」と伝えるだけ。
 
 ### スキルの思想
 
@@ -441,13 +443,13 @@ screenshot:
 **2. スキル取得の手順**
 
 ```
-足軽が作業中にパターンを発見
+冒険者が作業中にパターンを発見
     ↓
-dashboard.md の「スキル化候補」に上がる
+クエスト掲示板（dashboard.md）の「スキル化候補」に上がる
     ↓
-殿（あなた）が内容を確認
+依頼者（あなた）が内容を確認
     ↓
-承認すれば家老に指示してスキルを作成
+承認すれば受付官に指示してスキルを作成
 ```
 
 スキルはユーザ主導で増やすもの。自動で増えると管理不能になるため、「これは便利」と判断したものだけを残す。
@@ -486,7 +488,7 @@ claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequen
 # 5. Memory - セッション間の長期記憶（推奨！）
 # ✅ first_setup.sh で自動設定済み
 # 手動で再設定する場合:
-claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/shogun_memory.jsonl" -- npx -y @modelcontextprotocol/server-memory
+claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/guildmaster_memory.jsonl" -- npx -y @modelcontextprotocol/server-memory
 ```
 
 ### インストール確認
@@ -495,27 +497,27 @@ claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/shogun_memory.jsonl" -- n
 claude mcp list
 ```
 
-全サーバが「Connected」ステータスで表示されるはずです。
+全サーバが「Connected」と表示されるはずです。
 
 ---
 
 ## 🌍 実用例
 
-### 例1: 調査タスク
+### 例1: 調査クエスト
 
 ```
 あなた: 「AIコーディングアシスタント上位5つを調査して比較せよ」
 
 実行される処理:
-1. 将軍が家老に委譲
-2. 家老が割り当て:
-   - 足軽1: GitHub Copilotを調査
-   - 足軽2: Cursorを調査
-   - 足軽3: Claude Codeを調査
-   - 足軽4: Codeiumを調査
-   - 足軽5: Amazon CodeWhispererを調査
+1. ギルドマスターが受付官に委譲
+2. 受付官が割り当て:
+   - 冒険者1: GitHub Copilotを調査
+   - 冒険者2: Cursorを調査
+   - 冒険者3: Claude Codeを調査
+   - 冒険者4: Codeiumを調査
+   - 冒険者5: Amazon CodeWhispererを調査
 3. 5体が同時に調査
-4. 結果がdashboard.mdに集約
+4. 報告がクエスト掲示板（dashboard.md）に集約
 ```
 
 ### 例2: PoC準備
@@ -524,11 +526,11 @@ claude mcp list
 あなた: 「このNotionページのプロジェクトでPoC準備: [URL]」
 
 実行される処理:
-1. 家老がMCP経由でNotionコンテンツを取得
-2. 足軽2: 確認すべき項目をリスト化
-3. 足軽3: 技術的な実現可能性を調査
-4. 足軽4: PoC計画書を作成
-5. 全結果がdashboard.mdに集約、会議の準備完了
+1. 受付官がMCP経由でNotionコンテンツを取得
+2. 冒険者2: 確認すべき項目をリスト化
+3. 冒険者3: 技術的な実現可能性を調査
+4. 冒険者4: PoC計画書を作成
+5. 全報告がクエスト掲示板（dashboard.md）に集約、会議の準備完了
 ```
 
 ---
@@ -575,10 +577,10 @@ language: en   # 日本語 + 英訳併記
 │  shutsujin_departure.sh                                             │
 │      │                                                              │
 │      ├──▶ tmuxセッションを作成                                       │
-│      │         • "shogun"セッション（1ペイン）                        │
+│      │         • "guildmaster"セッション（1ペイン）                        │
 │      │         • "multiagent"セッション（9ペイン、3x3グリッド）        │
 │      │                                                              │
-│      ├──▶ キューファイルとダッシュボードをリセット                     │
+│      ├──▶ キューファイルと掲示板をリセット                             │
 │      │                                                              │
 │      └──▶ 全エージェントでClaude Codeを起動                          │
 │                                                                     │
@@ -615,7 +617,7 @@ language: en   # 日本語 + 英訳併記
 **通常の毎日の使用：**
 ```bash
 ./shutsujin_departure.sh          # 全て起動
-tmux attach-session -t shogun     # 接続してコマンドを出す
+tmux attach-session -t guildmaster     # 接続して依頼を出す
 ```
 
 **デバッグモード（手動制御）：**
@@ -623,14 +625,14 @@ tmux attach-session -t shogun     # 接続してコマンドを出す
 ./shutsujin_departure.sh -s       # セッションのみ作成
 
 # 特定のエージェントでClaude Codeを手動起動
-tmux send-keys -t shogun:0 'claude --dangerously-skip-permissions' Enter
+tmux send-keys -t guildmaster:0 'claude --dangerously-skip-permissions' Enter
 tmux send-keys -t multiagent:0.0 'claude --dangerously-skip-permissions' Enter
 ```
 
 **クラッシュ後の再起動：**
 ```bash
 # 既存セッションを終了
-tmux kill-session -t shogun
+tmux kill-session -t guildmaster
 tmux kill-session -t multiagent
 
 # 新しく起動
@@ -645,8 +647,8 @@ tmux kill-session -t multiagent
 `first_setup.sh` を実行すると、以下のエイリアスが `~/.bashrc` に自動追加されます：
 
 ```bash
-alias css='tmux attach-session -t shogun'      # 将軍ウィンドウの起動
-alias csm='tmux attach-session -t multiagent'  # 家老・足軽ウィンドウの起動
+alias css='tmux attach-session -t guildmaster'      # ギルドマスターウィンドウの起動
+alias csm='tmux attach-session -t multiagent'  # 受付官・冒険者ウィンドウの起動
 ```
 
 ※ エイリアスを反映するには `source ~/.bashrc` を実行するか、PowerShellで `wsl --shutdown` してからターミナルを開き直してください。
@@ -661,7 +663,7 @@ alias csm='tmux attach-session -t multiagent'  # 家老・足軽ウィンドウ�
 <summary><b>クリックでファイル構成を展開</b></summary>
 
 ```
-multi-agent-shogun/
+multi-agent-guild/
 │
 │  ┌─────────────────── セットアップスクリプト ───────────────────┐
 ├── install.bat               # Windows: 初回セットアップ
@@ -670,23 +672,23 @@ multi-agent-shogun/
 │  └────────────────────────────────────────────────────────────┘
 │
 ├── instructions/             # エージェント指示書
-│   ├── shogun.md             # 将軍の指示書
-│   ├── karo.md               # 家老の指示書
-│   └── ashigaru.md           # 足軽の指示書
+│   ├── guildmaster.md             # ギルドマスターの指示書
+│   ├── receptionist.md               # 受付官の指示書
+│   └── adventurer.md           # 冒険者の指示書
 │
 ├── config/
 │   └── settings.yaml         # 言語その他の設定
 │
 ├── projects/                # プロジェクト詳細（git対象外、機密情報含む）
-│   └── <project_id>.yaml   # 各プロジェクトの全情報（クライアント、タスク、Notion連携等）
+│   └── <project_id>.yaml   # 各プロジェクトの全情報（クライアント、クエスト、Notion連携等）
 │
 ├── queue/                    # 通信ファイル
-│   ├── shogun_to_karo.yaml   # 将軍から家老へのコマンド
-│   ├── tasks/                # 各ワーカーのタスクファイル
-│   └── reports/              # ワーカーレポート
+│   ├── guildmaster_to_receptionist.yaml   # ギルドマスターから受付官への依頼
+│   ├── tasks/                # 各クエストファイル
+│   └── reports/              # 冒険者レポート
 │
 ├── memory/                   # Memory MCP保存場所
-├── dashboard.md              # リアルタイム状況一覧
+├── dashboard.md              # クエスト掲示板（リアルタイム進行状況）
 └── CLAUDE.md                 # Claude用プロジェクトコンテキスト
 ```
 
@@ -701,12 +703,12 @@ multi-agent-shogun/
 ### 仕組み
 
 ```
-config/projects.yaml          # プロジェクト一覧（ID・名前・パス・ステータスのみ）
+config/projects.yaml          # プロジェクト一覧（ID・名前・パス・進行状況のみ）
 projects/<project_id>.yaml    # 各プロジェクトの詳細情報
 ```
 
 - **`config/projects.yaml`**: どのプロジェクトがあるかの一覧（サマリのみ）
-- **`projects/<id>.yaml`**: そのプロジェクトの全詳細（クライアント情報、契約、タスク、関連ファイル、Notionページ等）
+- **`projects/<id>.yaml`**: そのプロジェクトの全詳細（クライアント情報、契約、クエスト、関連ファイル、Notionページ等）
 - **プロジェクトの実ファイル**（ソースコード、設計書等）は `path` で指定した外部フォルダに配置
 - **`projects/` はGit追跡対象外**（クライアントの機密情報を含むため）
 
@@ -718,7 +720,7 @@ projects:
   - id: my_client
     name: "クライアントXコンサルティング"
     path: "/mnt/c/Consulting/client_x"
-    status: active
+    progress: active
 
 # projects/my_client.yaml
 id: my_client
@@ -727,13 +729,13 @@ client:
   company: "X株式会社"
 contract:
   fee: "月額"
-current_tasks:
-  - id: task_001
+current_quests:
+  - id: quest_001
     name: "システムアーキテクチャレビュー"
-    status: in_progress
+    progress: in_progress
 ```
 
-この分離設計により、将軍システムは複数の外部プロジェクトを横断的に統率しつつ、プロジェクトの詳細情報はバージョン管理の対象外に保つことができる。
+この分離設計により、ギルドマスターシステムは複数の外部プロジェクトを横断的に統率しつつ、プロジェクトの詳細情報はバージョン管理の対象外に保つことができる。
 
 ---
 
@@ -767,9 +769,9 @@ claude --dangerously-skip-permissions --system-prompt "..."
 </details>
 
 <details>
-<summary><b>ワーカーが停止している？</b></summary>
+<summary><b>冒険者が停止している？</b></summary>
 
-ワーカーのペインを確認：
+冒険者のペインを確認：
 ```bash
 tmux attach-session -t multiagent
 # Ctrl+B の後に数字でペインを切り替え
@@ -783,12 +785,12 @@ tmux attach-session -t multiagent
 
 | コマンド | 説明 |
 |----------|------|
-| `tmux attach -t shogun` | 将軍に接続 |
-| `tmux attach -t multiagent` | ワーカーに接続 |
+| `tmux attach -t guildmaster` | ギルドマスターに接続 |
+| `tmux attach -t multiagent` | 冒険者に接続 |
 | `Ctrl+B` の後 `0-8` | ペイン間を切り替え |
 | `Ctrl+B` の後 `d` | デタッチ（実行継続） |
-| `tmux kill-session -t shogun` | 将軍セッションを停止 |
-| `tmux kill-session -t multiagent` | ワーカーセッションを停止 |
+| `tmux kill-session -t guildmaster` | ギルドマスターセッションを停止 |
+| `tmux kill-session -t multiagent` | 冒険者セッションを停止 |
 
 ### 🖱️ マウス操作
 

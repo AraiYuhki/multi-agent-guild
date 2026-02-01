@@ -1,6 +1,6 @@
 #!/bin/bash
 # ============================================================
-# first_setup.sh - multi-agent-shogun 初回セットアップスクリプト
+# first_setup.sh - multi-agent-guild 初回セットアップスクリプト
 # Ubuntu / WSL / Mac 用環境構築ツール
 # ============================================================
 # 実行方法:
@@ -50,7 +50,7 @@ HAS_ERROR=false
 
 echo ""
 echo "  ╔══════════════════════════════════════════════════════════════╗"
-echo "  ║  🏯 multi-agent-shogun インストーラー                         ║"
+echo "  ║  🏰 multi-agent-guild インストーラー                         ║"
 echo "  ║     Initial Setup Script for Ubuntu / WSL                    ║"
 echo "  ╚══════════════════════════════════════════════════════════════╝"
 echo ""
@@ -374,11 +374,11 @@ log_step "STEP 7: 設定ファイル確認"
 if [ ! -f "$SCRIPT_DIR/config/settings.yaml" ]; then
     log_info "config/settings.yaml を作成中..."
     cat > "$SCRIPT_DIR/config/settings.yaml" << EOF
-# multi-agent-shogun 設定ファイル
+# multi-agent-guild 設定ファイル
 
 # 言語設定
-# ja: 日本語（戦国風日本語のみ、併記なし）
-# en: 英語（戦国風日本語 + 英訳併記）
+# ja: 日本語（冒険者ギルド風日本語のみ、併記なし）
+# en: 英語（冒険者ギルド風日本語 + 英訳併記）
 # その他の言語コード（es, zh, ko, fr, de 等）も対応
 language: ja
 
@@ -389,7 +389,7 @@ shell: bash
 
 # スキル設定
 skill:
-  # スキル保存先（スキル名に shogun- プレフィックスを付けて保存）
+  # スキル保存先（スキル名に guildmaster- プレフィックスを付けて保存）
   save_path: "~/.claude/skills/"
 
   # ローカルスキル保存先（このプロジェクト専用）
@@ -431,7 +431,7 @@ if [ ! -f "$SCRIPT_DIR/memory/global_context.md" ]; then
 最終更新: (未設定)
 
 ## システム方針
-- (殿の好み・方針をここに記載)
+- (依頼者の好み・方針をここに記載)
 
 ## プロジェクト横断の決定事項
 - (複数プロジェクトに影響する決定をここに記載)
@@ -447,16 +447,16 @@ fi
 RESULTS+=("設定ファイル: OK")
 
 # ============================================================
-# STEP 8: 足軽用タスク・レポートファイル初期化
+# STEP 8: 冒険者用タスク・レポートファイル初期化
 # ============================================================
 log_step "STEP 8: キューファイル初期化"
 
-# 足軽用タスクファイル作成
+# 冒険者用タスクファイル作成
 for i in {1..8}; do
-    TASK_FILE="$SCRIPT_DIR/queue/tasks/ashigaru${i}.yaml"
+    TASK_FILE="$SCRIPT_DIR/queue/tasks/adventurer${i}.yaml"
     if [ ! -f "$TASK_FILE" ]; then
         cat > "$TASK_FILE" << EOF
-# 足軽${i}専用タスクファイル
+# 冒険者${i}専用タスクファイル
 task:
   task_id: null
   parent_cmd: null
@@ -467,14 +467,14 @@ task:
 EOF
     fi
 done
-log_info "足軽タスクファイル (1-8) を確認/作成しました"
+log_info "冒険者タスクファイル (1-8) を確認/作成しました"
 
-# 足軽用レポートファイル作成
+# 冒険者用レポートファイル作成
 for i in {1..8}; do
-    REPORT_FILE="$SCRIPT_DIR/queue/reports/ashigaru${i}_report.yaml"
+    REPORT_FILE="$SCRIPT_DIR/queue/reports/adventurer${i}_report.yaml"
     if [ ! -f "$REPORT_FILE" ]; then
         cat > "$REPORT_FILE" << EOF
-worker_id: ashigaru${i}
+worker_id: adventurer${i}
 task_id: null
 timestamp: ""
 status: idle
@@ -482,7 +482,7 @@ result: null
 EOF
     fi
 done
-log_info "足軽レポートファイル (1-8) を確認/作成しました"
+log_info "冒険者レポートファイル (1-8) を確認/作成しました"
 
 RESULTS+=("キューファイル: OK")
 
@@ -517,15 +517,15 @@ BASHRC_FILE="$HOME/.bashrc"
 # aliasが既に存在するかチェックし、なければ追加
 ALIAS_ADDED=false
 
-# css alias (将軍ウィンドウの起動)
+# css alias (ギルドマスターウィンドウの起動)
 if [ -f "$BASHRC_FILE" ]; then
-    EXPECTED_CSS="alias css='tmux attach-session -t shogun'"
+    EXPECTED_CSS="alias css='tmux attach-session -t guildmaster'"
     if ! grep -q "alias css=" "$BASHRC_FILE" 2>/dev/null; then
         # alias が存在しない → 新規追加
         echo "" >> "$BASHRC_FILE"
-        echo "# multi-agent-shogun aliases (added by first_setup.sh)" >> "$BASHRC_FILE"
+        echo "# multi-agent-guild aliases (added by first_setup.sh)" >> "$BASHRC_FILE"
         echo "$EXPECTED_CSS" >> "$BASHRC_FILE"
-        log_info "alias css を追加しました（将軍ウィンドウの起動）"
+        log_info "alias css を追加しました（ギルドマスターウィンドウの起動）"
         ALIAS_ADDED=true
     elif ! grep -qF "$EXPECTED_CSS" "$BASHRC_FILE" 2>/dev/null; then
         # alias は存在するがパスが異なる → 更新
@@ -539,15 +539,15 @@ if [ -f "$BASHRC_FILE" ]; then
         log_info "alias css は既に正しく設定されています"
     fi
 
-    # csm alias (家老・足軽ウィンドウの起動)
+    # csm alias (受付官・冒険者ウィンドウの起動)
     EXPECTED_CSM="alias csm='tmux attach-session -t multiagent'"
     if ! grep -q "alias csm=" "$BASHRC_FILE" 2>/dev/null; then
         if [ "$ALIAS_ADDED" = false ]; then
             echo "" >> "$BASHRC_FILE"
-            echo "# multi-agent-shogun aliases (added by first_setup.sh)" >> "$BASHRC_FILE"
+            echo "# multi-agent-guild aliases (added by first_setup.sh)" >> "$BASHRC_FILE"
         fi
         echo "$EXPECTED_CSM" >> "$BASHRC_FILE"
-        log_info "alias csm を追加しました（家老・足軽ウィンドウの起動）"
+        log_info "alias csm を追加しました（受付官・冒険者ウィンドウの起動）"
         ALIAS_ADDED=true
     elif ! grep -qF "$EXPECTED_CSM" "$BASHRC_FILE" 2>/dev/null; then
         if sed -i "s|alias csm=.*|$EXPECTED_CSM|" "$BASHRC_FILE" 2>/dev/null; then
@@ -586,7 +586,7 @@ if command -v claude &> /dev/null; then
     else
         log_info "Memory MCP を設定中..."
         if claude mcp add memory \
-            -e MEMORY_FILE_PATH="$SCRIPT_DIR/memory/shogun_memory.jsonl" \
+            -e MEMORY_FILE_PATH="$SCRIPT_DIR/memory/guildmaster_memory.jsonl" \
             -- npx -y @modelcontextprotocol/server-memory 2>/dev/null; then
             log_success "Memory MCP 設定完了"
             RESULTS+=("Memory MCP: 設定完了")
@@ -639,7 +639,7 @@ echo "  ┌───────────────────────
 echo "  │  📜 次のステップ                                             │"
 echo "  └──────────────────────────────────────────────────────────────┘"
 echo ""
-echo "  出陣（全エージェント起動）:"
+echo "  冒険開始（全エージェント起動）:"
 echo "     ./shutsujin_departure.sh"
 echo ""
 echo "  オプション:"
@@ -653,7 +653,7 @@ echo ""
 echo "  詳細は README.md を参照してください。"
 echo ""
 echo "  ════════════════════════════════════════════════════════════════"
-echo "   天下布武！ (Tenka Fubu!)"
+echo "   ギルド開幕！ (Guild open!)"
 echo "  ════════════════════════════════════════════════════════════════"
 echo ""
 

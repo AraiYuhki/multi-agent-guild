@@ -1,10 +1,10 @@
-# multi-agent-shogun
+# multi-agent-guild
 
 <div align="center">
 
 **Multi-Agent Orchestration System for Claude Code**
 
-*One command. Eight AI agents working in parallel.*
+*One request. Eight AI agents working in parallel.*
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Claude Code](https://img.shields.io/badge/Claude-Code-blueviolet)](https://claude.ai)
@@ -18,30 +18,32 @@
 
 ## What is this?
 
-**multi-agent-shogun** is a system that runs multiple Claude Code instances simultaneously, organized like a feudal Japanese army.
+**multi-agent-guild** is a system that runs multiple Claude Code instances simultaneously, organized as an adventurers' guild.
 
 **Why use this?**
-- Give one command, get 8 AI workers executing in parallel
-- No waiting - you can keep giving commands while tasks run in background
+- Submit one request, get 8 adventurers executing in parallel
+- No waiting - you can keep submitting requests while quests run in the background
 - AI remembers your preferences across sessions (Memory MCP)
-- Real-time progress tracking via dashboard
+- Real-time progress tracking via the quest board (`dashboard.md`)
+
+**Guild flow:** Request → Quest → Adventure → Report
 
 ```
-        You (The Lord)
+        You (Client / Patron)
              │
-             ▼ Give orders
+             ▼ Submit request
       ┌─────────────┐
-      │   SHOGUN    │  ← Receives your command, delegates immediately
+      │  GUILDMASTER │  ← Interprets the request and delegates immediately
       └──────┬──────┘
              │ YAML files + tmux
       ┌──────▼──────┐
-      │    KARO     │  ← Distributes tasks to workers
+      │  RECEPTIONIST  │  ← Breaks quests down and assigns missions
       └──────┬──────┘
              │
     ┌─┬─┬─┬─┴─┬─┬─┬─┐
-    │1│2│3│4│5│6│7│8│  ← 8 workers execute in parallel
+    │1│2│3│4│5│6│7│8│  ← 8 adventurers execute in parallel
     └─┴─┴─┴─┴─┴─┴─┴─┘
-        ASHIGARU
+       ADVENTURERS
 ```
 
 ---
@@ -61,9 +63,9 @@
 
 📥 **Download this repository**
 
-[Download ZIP](https://github.com/yohey-w/multi-agent-shogun/archive/refs/heads/main.zip) and extract to `C:\tools\multi-agent-shogun`
+[Download ZIP](https://github.com/yohey-w/multi-agent-guild/archive/refs/heads/main.zip) and extract to `C:\tools\multi-agent-guild`
 
-*Or use git:* `git clone https://github.com/yohey-w/multi-agent-shogun.git C:\tools\multi-agent-shogun`
+*Or use git:* `git clone https://github.com/yohey-w/multi-agent-guild.git C:\tools\multi-agent-guild`
 
 </td>
 </tr>
@@ -92,7 +94,7 @@ Right-click and select **"Run as administrator"** (required if WSL2 is not yet i
 🐧 **Open Ubuntu and run** (first time only)
 
 ```bash
-cd /mnt/c/tools/multi-agent-shogun
+cd /mnt/c/tools/multi-agent-guild
 ./first_setup.sh
 ```
 
@@ -121,7 +123,7 @@ cd /mnt/c/tools/multi-agent-shogun
 Open **Ubuntu terminal** (WSL) and run:
 
 ```bash
-cd /mnt/c/tools/multi-agent-shogun
+cd /mnt/c/tools/multi-agent-guild
 ./shutsujin_departure.sh
 ```
 
@@ -134,8 +136,8 @@ cd /mnt/c/tools/multi-agent-shogun
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yohey-w/multi-agent-shogun.git ~/multi-agent-shogun
-cd ~/multi-agent-shogun
+git clone https://github.com/yohey-w/multi-agent-guild.git ~/multi-agent-guild
+cd ~/multi-agent-guild
 
 # 2. Make scripts executable
 chmod +x *.sh
@@ -147,7 +149,7 @@ chmod +x *.sh
 ### Daily Startup
 
 ```bash
-cd ~/multi-agent-shogun
+cd ~/multi-agent-guild
 ./shutsujin_departure.sh
 ```
 
@@ -195,12 +197,12 @@ Then restart your computer and run `install.bat` again.
 - ✅ Guides you to the next steps (`first_setup.sh`)
 
 ### What `shutsujin_departure.sh` does:
-- ✅ Creates tmux sessions (shogun + multiagent)
+- ✅ Creates tmux sessions (guildmaster + multiagent)
 - ✅ Launches Claude Code on all agents
 - ✅ Automatically loads instruction files for each agent
 - ✅ Resets queue files for a fresh start
 
-**After running, all agents are ready to receive commands immediately!**
+**After running, all agents are ready to receive requests immediately!**
 
 </details>
 
@@ -229,54 +231,54 @@ After running either option, **AI agents** will start automatically:
 
 | Agent | Role | Quantity |
 |-------|------|----------|
-| 🏯 Shogun | Commander - receives your orders | 1 |
-| 📋 Karo | Manager - distributes tasks | 1 |
-| ⚔️ Ashigaru | Workers - execute tasks in parallel | 8 |
+| 🛡️ Guildmaster | Master - receives your requests | 1 |
+| 📋 Receptionist | Senior adventurer - splits quests and assigns missions | 1 |
+| ⚔️ Adventurer | Adventurers - execute quests in parallel | 8 |
 
 You'll see tmux sessions created:
-- `shogun` - Connect here to give commands
+- `guildmaster` - Connect here to submit requests
 - `multiagent` - Workers running in background
 
 ---
 
 ## 📖 Basic Usage
 
-### Step 1: Connect to Shogun
+### Step 1: Connect to the Guildmaster
 
 After running `shutsujin_departure.sh`, all agents automatically load their instructions and are ready to work.
 
-Open a new terminal and connect to the Shogun:
+Open a new terminal and connect to the Guildmaster:
 
 ```bash
-tmux attach-session -t shogun
+tmux attach-session -t guildmaster
 ```
 
-### Step 2: Give Your First Order
+### Step 2: Submit Your First Request
 
-The Shogun is already initialized! Just give your command:
+The Guildmaster is already initialized! Just submit your request:
 
 ```
 Investigate the top 5 JavaScript frameworks and create a comparison table.
 ```
 
-The Shogun will:
-1. Write the task to a YAML file
-2. Notify the Karo (manager)
+The Guildmaster will:
+1. Write the quest to a YAML file
+2. Notify the Receptionist (quest coordinator)
 3. Return control to you immediately (you don't have to wait!)
 
-Meanwhile, the Karo distributes the work to Ashigaru workers who execute in parallel.
+Meanwhile, the Receptionist distributes the work to Adventurer workers who execute in parallel.
 
 ### Step 3: Check Progress
 
-Open `dashboard.md` in your editor to see real-time status:
+Open the quest board (`dashboard.md`) in your editor to see real-time progress:
 
 ```markdown
 ## In Progress
-| Worker | Task | Status |
+| Adventurer | Quest | Progress |
 |--------|------|--------|
-| Ashigaru 1 | React research | Running |
-| Ashigaru 2 | Vue research | Running |
-| Ashigaru 3 | Angular research | Done |
+| Adventurer 1 | React research | Running |
+| Adventurer 2 | Vue research | Running |
+| Adventurer 3 | Angular research | Done |
 ```
 
 ---
@@ -285,27 +287,27 @@ Open `dashboard.md` in your editor to see real-time status:
 
 ### ⚡ 1. Parallel Execution
 
-One command can spawn up to 8 parallel tasks:
+One request can spawn up to 8 parallel quests:
 
 ```
 You: "Research 5 MCP servers"
-→ 5 Ashigaru start researching simultaneously
-→ Results ready in minutes, not hours
+→ 5 Adventurer start researching simultaneously
+→ Reports ready in minutes, not hours
 ```
 
 ### 🔄 2. Non-Blocking Workflow
 
-The Shogun delegates immediately and returns control to you:
+The Guildmaster delegates immediately and returns control to you:
 
 ```
-You: Give order → Shogun: Delegates → You: Can give next order immediately
+You: Submit request → Guildmaster: Delegates → You: Can submit the next request immediately
                                            ↓
-                         Workers: Execute in background
+                         Adventurers: Execute in background
                                            ↓
-                         Dashboard: Shows results
+                         Dashboard: Shows reports
 ```
 
-You never have to wait for long tasks to complete.
+You never have to wait for long quests to complete.
 
 ### 🧠 3. Memory Across Sessions (Memory MCP)
 
@@ -333,7 +335,7 @@ VSCode's Claude Code extension lets you paste screenshots to explain issues. Thi
 screenshot:
   path: "/mnt/c/Users/YourName/Pictures/Screenshots"
 
-# Then just tell the Shogun:
+# Then just tell the Guildmaster:
 You: "Check the latest screenshot"
 You: "Look at the last 2 screenshots"
 → AI reads and analyzes your screenshots instantly
@@ -350,11 +352,11 @@ Perfect for:
 
 | Agent | Model | Thinking | Reason |
 |-------|-------|----------|--------|
-| Shogun | Opus | Disabled | Delegation & dashboard updates don't need deep reasoning |
-| Karo | Default | Enabled | Task distribution requires careful judgment |
-| Ashigaru | Default | Enabled | Actual implementation needs full capabilities |
+| Guildmaster | Opus | Disabled | Delegation & quest board updates don't need deep reasoning |
+| Receptionist | Default | Enabled | Quest distribution requires careful judgment |
+| Adventurer | Default | Enabled | Actual implementation needs full capabilities |
 
-The Shogun uses `MAX_THINKING_TOKENS=0` to disable extended thinking, reducing latency and cost while maintaining Opus-level judgment for high-level decisions.
+The Guildmaster uses `MAX_THINKING_TOKENS=0` to disable extended thinking, reducing latency and cost while maintaining Opus-level judgment for high-level decisions.
 
 ### 📁 Context Management
 
@@ -362,12 +364,12 @@ The system uses a three-layer context structure for efficient knowledge sharing:
 
 | Layer | Location | Purpose |
 |-------|----------|---------|
-| Memory MCP | `memory/shogun_memory.jsonl` | Persistent memory across sessions (preferences, decisions) |
-| Global | `memory/global_context.md` | System-wide settings, user preferences |
+| Memory MCP | `memory/guildmaster_memory.jsonl` | Persistent memory across sessions (preferences, decisions) |
+| Global | `memory/global_context.md` | System-wide settings, client preferences |
 | Project | `context/{project}.md` | Project-specific knowledge and state |
 
 This design allows:
-- Any Ashigaru to pick up work on any project
+- Any Adventurer to pick up work on any project
 - Consistent context across agent switches
 - Clear separation of concerns
 - Knowledge persistence across sessions
@@ -389,15 +391,15 @@ All projects use the same 7-section template:
 This standardized structure ensures:
 - Quick onboarding for any agent
 - Consistent information across all projects
-- Easy handoffs between Ashigaru workers
+- Easy handoffs between Adventurer workers
 
 ### 🛠️ Skills
 
 Skills are not included in this repository by default.
-As you use the system, skill candidates will appear in `dashboard.md`.
+As you use the system, skill candidates will appear on the quest board (`dashboard.md`).
 Review and approve them to grow your personal skill library.
 
-Skills can be invoked with `/skill-name`. Just tell the Shogun: "run `/skill-name`".
+Skills can be invoked with `/skill-name`. Just tell the Guildmaster: "run `/skill-name`".
 
 ---
 
@@ -405,51 +407,51 @@ Skills can be invoked with `/skill-name`. Just tell the Shogun: "run `/skill-nam
 
 ### Why Hierarchical Structure?
 
-The Shogun → Karo → Ashigaru hierarchy exists for:
+The Guildmaster → Receptionist → Adventurer hierarchy exists for:
 
-1. **Immediate Response**: Shogun delegates instantly and returns control to you
-2. **Parallel Execution**: Karo distributes to multiple Ashigaru simultaneously
-3. **Separation of Concerns**: Each role is clearly defined — Shogun decides "what", Karo decides "who"
-4. **Scalability**: Adding more Ashigaru doesn't break the structure
-5. **Fault Isolation**: One Ashigaru failing doesn't affect others
-6. **Centralized Reporting**: Only Shogun communicates with you, keeping information organized
+1. **Immediate Response**: Guildmaster delegates instantly and returns control to you
+2. **Parallel Execution**: Receptionist distributes to multiple Adventurer simultaneously
+3. **Separation of Concerns**: Each role is clearly defined — Guildmaster decides "what", Receptionist decides "who"
+4. **Scalability**: Adding more Adventurer doesn't break the structure
+5. **Fault Isolation**: One Adventurer failing doesn't affect others
+6. **Centralized Reporting**: Only Guildmaster communicates with you, keeping information organized
 
 ### Why YAML + send-keys?
 
 - **YAML files**: Structured communication that survives agent restarts and is human-readable for debugging
 - **send-keys**: Event-driven wakeups (no polling = no wasted API calls)
 - **No direct calls**: Agents can't interrupt each other or your input
-- **Conflict avoidance**: Each Ashigaru has dedicated files, preventing race conditions
+- **Conflict avoidance**: Each Adventurer has dedicated files, preventing race conditions
 
-### Why Only Karo Updates Dashboard?
+### Why Only Receptionist Updates the Quest Board?
 
 - **Single responsibility**: One writer = no conflicts
-- **Information hub**: Karo receives all reports, knows the full picture
+- **Information hub**: Receptionist receives all reports, knows the full picture
 - **Consistency**: All updates go through one quality gate
-- **No interruptions**: Prevents disrupting your input when Shogun would otherwise update the dashboard
+- **No interruptions**: Prevents disrupting your input when Guildmaster would otherwise update the quest board
 
 ### How Skills Work
 
 Skills (`.claude/commands/`) are **not committed to this repository** by design.
 
 **Why?**
-- Each user's workflow is different
+- Each client's workflow is different
 - Skills should grow organically based on your needs
 - No one-size-fits-all solution
 
 **How to create new skills:**
 
 ```
-Ashigaru notices a repeatable pattern during work
+Adventurer notices a repeatable pattern during work
     ↓
-Candidate appears in dashboard.md under "Skill Candidates"
+Candidate appears on the quest board (`dashboard.md`) under "Skill Candidates"
     ↓
-You (the Lord) review the candidate
+You (the client/patron) review the candidate
     ↓
-If approved, Karo creates the skill
+If approved, Receptionist creates the skill
 ```
 
-Skills are **user-driven** — they only grow when you decide they're useful. Automatic growth would make them unmanageable, so only what you explicitly approve gets added.
+Skills are **client-driven** — they only grow when you decide they're useful. Automatic growth would make them unmanageable, so only what you explicitly approve gets added.
 
 ---
 
@@ -485,7 +487,7 @@ claude mcp add sequential-thinking -- npx -y @modelcontextprotocol/server-sequen
 # 5. Memory - Long-term memory across sessions (Recommended!)
 # ✅ Automatically configured by first_setup.sh
 # To reconfigure manually:
-claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/shogun_memory.jsonl" -- npx -y @modelcontextprotocol/server-memory
+claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/guildmaster_memory.jsonl" -- npx -y @modelcontextprotocol/server-memory
 ```
 
 ### Verify Installation
@@ -494,27 +496,27 @@ claude mcp add memory -e MEMORY_FILE_PATH="$PWD/memory/shogun_memory.jsonl" -- n
 claude mcp list
 ```
 
-You should see all servers with "Connected" status.
+You should see all servers listed as "Connected".
 
 ---
 
 ## 🌍 Real-World Use Cases
 
-### Example 1: Research Task
+### Example 1: Research Quest
 
 ```
 You: "Research the top 5 AI coding assistants and compare them"
 
 What happens:
-1. Shogun delegates to Karo
-2. Karo assigns:
-   - Ashigaru 1: Research GitHub Copilot
-   - Ashigaru 2: Research Cursor
-   - Ashigaru 3: Research Claude Code
-   - Ashigaru 4: Research Codeium
-   - Ashigaru 5: Research Amazon CodeWhisperer
+1. Guildmaster delegates to Receptionist
+2. Receptionist assigns:
+   - Adventurer 1: Research GitHub Copilot
+   - Adventurer 2: Research Cursor
+   - Adventurer 3: Research Claude Code
+   - Adventurer 4: Research Codeium
+   - Adventurer 5: Research Amazon CodeWhisperer
 3. All 5 research simultaneously
-4. Results compiled in dashboard.md
+4. Reports compiled on the quest board (`dashboard.md`)
 ```
 
 ### Example 2: PoC Preparation
@@ -523,11 +525,11 @@ What happens:
 You: "Prepare a PoC for the project in this Notion page: [URL]"
 
 What happens:
-1. Karo fetches Notion content via MCP
-2. Ashigaru 2: Lists items to clarify
-3. Ashigaru 3: Researches technical feasibility
-4. Ashigaru 4: Creates PoC plan document
-5. All results in dashboard.md, ready for your meeting
+1. Receptionist fetches Notion content via MCP
+2. Adventurer 2: Lists items to clarify
+3. Adventurer 3: Researches technical feasibility
+4. Adventurer 4: Creates PoC plan document
+5. All reports on the quest board (`dashboard.md`), ready for your meeting
 ```
 
 ---
@@ -574,10 +576,10 @@ language: en   # Japanese + English translation
 │  shutsujin_departure.sh                                             │
 │      │                                                              │
 │      ├──▶ Create tmux sessions                                      │
-│      │         • "shogun" session (1 pane)                          │
+│      │         • "guildmaster" session (1 pane)                          │
 │      │         • "multiagent" session (9 panes, 3x3 grid)           │
 │      │                                                              │
-│      ├──▶ Reset queue files and dashboard                           │
+│      ├──▶ Reset queue files and quest board                          │
 │      │                                                              │
 │      └──▶ Launch Claude Code on all agents                          │
 │                                                                     │
@@ -614,7 +616,7 @@ language: en   # Japanese + English translation
 **Normal Daily Usage:**
 ```bash
 ./shutsujin_departure.sh          # Start everything
-tmux attach-session -t shogun     # Connect to give commands
+tmux attach-session -t guildmaster     # Connect to submit requests
 ```
 
 **Debug Mode (manual control):**
@@ -622,14 +624,14 @@ tmux attach-session -t shogun     # Connect to give commands
 ./shutsujin_departure.sh -s       # Create sessions only
 
 # Manually start Claude Code on specific agents
-tmux send-keys -t shogun:0 'claude --dangerously-skip-permissions' Enter
+tmux send-keys -t guildmaster:0 'claude --dangerously-skip-permissions' Enter
 tmux send-keys -t multiagent:0.0 'claude --dangerously-skip-permissions' Enter
 ```
 
 **Restart After Crash:**
 ```bash
 # Kill existing sessions
-tmux kill-session -t shogun
+tmux kill-session -t guildmaster
 tmux kill-session -t multiagent
 
 # Start fresh
@@ -644,8 +646,8 @@ tmux kill-session -t multiagent
 Running `first_setup.sh` automatically adds these aliases to `~/.bashrc`:
 
 ```bash
-alias css='cd /mnt/c/tools/multi-agent-shogun && ./shutsujin_departure.sh'  # Setup + deploy
-alias csm='cd /mnt/c/tools/multi-agent-shogun'                              # Navigate to directory only
+alias css='cd /mnt/c/tools/multi-agent-guild && ./shutsujin_departure.sh'  # Setup + deploy
+alias csm='cd /mnt/c/tools/multi-agent-guild'                              # Navigate to directory only
 ```
 
 *To apply aliases, run `source ~/.bashrc` or restart your terminal. On WSL, run `wsl --shutdown` in PowerShell first — simply closing the window does not terminate WSL.*
@@ -660,7 +662,7 @@ alias csm='cd /mnt/c/tools/multi-agent-shogun'                              # Na
 <summary><b>Click to expand file structure</b></summary>
 
 ```
-multi-agent-shogun/
+multi-agent-guild/
 │
 │  ┌─────────────────── SETUP SCRIPTS ───────────────────┐
 ├── install.bat               # Windows: First-time setup
@@ -669,23 +671,23 @@ multi-agent-shogun/
 │  └────────────────────────────────────────────────────┘
 │
 ├── instructions/             # Agent instruction files
-│   ├── shogun.md             # Commander instructions
-│   ├── karo.md               # Manager instructions
-│   └── ashigaru.md           # Worker instructions
+│   ├── guildmaster.md             # Guildmaster instructions
+│   ├── receptionist.md               # Receptionist instructions
+│   └── adventurer.md           # Adventurer instructions
 │
 ├── config/
 │   └── settings.yaml         # Language and other settings
 │
 ├── projects/                # Project details (git-ignored, contains client data)
-│   └── <project_id>.yaml   # Full project info (client, tasks, Notion links, etc.)
+│   └── <project_id>.yaml   # Full project info (client, quests, Notion links, etc.)
 │
 ├── queue/                    # Communication files
-│   ├── shogun_to_karo.yaml   # Commands from Shogun to Karo
-│   ├── tasks/                # Individual worker task files
-│   └── reports/              # Worker reports
+│   ├── guildmaster_to_receptionist.yaml   # Requests from Guildmaster to Receptionist
+│   ├── tasks/                # Individual quest files
+│   └── reports/              # Adventurer reports
 │
 ├── memory/                   # Memory MCP storage
-├── dashboard.md              # Real-time status overview
+├── dashboard.md              # Quest board & real-time progress overview
 └── CLAUDE.md                 # Project context for Claude
 ```
 
@@ -695,17 +697,17 @@ multi-agent-shogun/
 
 ## 📂 Project Management
 
-This system manages **all white-collar tasks**, not just its own development. Projects can live anywhere on your filesystem — they don't need to be inside this repository.
+This system manages **all white-collar quests**, not just its own development. Projects can live anywhere on your filesystem — they don't need to be inside this repository.
 
 ### How It Works
 
 ```
-config/projects.yaml          # Project registry (ID, name, path, status)
-projects/<project_id>.yaml    # Full project details (client info, tasks, Notion links, etc.)
+config/projects.yaml          # Project registry (ID, name, path, progress)
+projects/<project_id>.yaml    # Full project details (client info, quests, Notion links, etc.)
 ```
 
-- **`config/projects.yaml`**: Lists all projects with basic metadata (ID, name, path, status)
-- **`projects/<id>.yaml`**: Contains full details for each project (client info, contract, tasks, related files, Notion pages, etc.)
+- **`config/projects.yaml`**: Lists all projects with basic metadata (ID, name, path, progress)
+- **`projects/<id>.yaml`**: Contains full details for each project (client info, contract, quests, related files, Notion pages, etc.)
 - **Project files** (source code, docs, etc.) live at the `path` specified in the project entry — anywhere on the filesystem
 - **`projects/` is git-ignored** because it may contain confidential client information
 
@@ -717,7 +719,7 @@ projects:
   - id: my_client
     name: "Client X Consulting"
     path: "/mnt/c/Consulting/client_x"
-    status: active
+    progress: active
 
 # projects/my_client.yaml
 id: my_client
@@ -726,13 +728,13 @@ client:
   company: "X Corp"
 contract:
   fee: "monthly"
-current_tasks:
-  - id: task_001
+current_quests:
+  - id: quest_001
     name: "System architecture review"
-    status: in_progress
+    progress: in_progress
 ```
 
-This separation allows the Shogun system to orchestrate tasks across multiple external projects while keeping project details private and out of version control.
+This separation allows the Guildmaster system to orchestrate quests across multiple external projects while keeping project details private and out of version control.
 
 ---
 
@@ -782,11 +784,11 @@ tmux attach-session -t multiagent
 
 | Command | Description |
 |---------|-------------|
-| `tmux attach -t shogun` | Connect to Shogun |
+| `tmux attach -t guildmaster` | Connect to Guildmaster |
 | `tmux attach -t multiagent` | Connect to workers |
 | `Ctrl+B` then `0-8` | Switch between panes |
 | `Ctrl+B` then `d` | Detach (leave running) |
-| `tmux kill-session -t shogun` | Stop Shogun session |
+| `tmux kill-session -t guildmaster` | Stop Guildmaster session |
 | `tmux kill-session -t multiagent` | Stop worker sessions |
 
 ### 🖱️ Mouse Support
