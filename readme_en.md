@@ -235,6 +235,11 @@ After running either option, **AI agents** will start automatically:
 | 📋 Receptionist | Senior adventurer - splits quests and assigns missions | 1 |
 | ⚔️ Adventurer | Adventurers - execute quests in parallel | 8 |
 
+**Role separation and approval flow (important)**
+- Guildmaster handles requirement definition and overall direction, and does **not** manage Adventurers directly.
+- Receptionist handles progress management and internal reviews, advancing intermediate steps when no client decision is needed.
+- When a client decision is required, Guildmaster summarizes options and waits for your final decision.
+
 You'll see tmux sessions created:
 - `guildmaster` - Connect here to submit requests
 - `multiagent` - Workers running in background
@@ -413,7 +418,7 @@ This standardized structure ensures:
 
 Skills are not included in this repository by default.
 As you use the system, skill candidates will appear on the quest board (`dashboard.md`).
-Review and approve them to grow your personal skill library.
+Review and decide whether to add them to your personal skill library.
 
 Skills can be invoked with `/skill-name`. Just tell the Guildmaster: "run `/skill-name`".
 
@@ -464,10 +469,10 @@ Candidate appears on the quest board (`dashboard.md`) under "Skill Candidates"
     ↓
 You (the client/patron) review the candidate
     ↓
-If approved, Receptionist creates the skill
+If you decide to proceed, Receptionist creates the skill
 ```
 
-Skills are **client-driven** — they only grow when you decide they're useful. Automatic growth would make them unmanageable, so only what you explicitly approve gets added.
+Skills are **client-driven** — they only grow when you decide they're useful. Automatic growth would make them unmanageable, so only what you explicitly choose gets added.
 
 ---
 
