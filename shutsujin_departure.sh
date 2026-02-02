@@ -183,7 +183,7 @@ show_guild_cry() {
 
 ADVENTURER_EOF
 
-    echo -e "                    \033[1;36m「「「 はっ！！ 冒険に出発いたす！！ 」」」\033[0m"
+    echo -e "                    \033[1;36m「「「 出発します！冒険を開始します！ 」」」\033[0m"
     echo ""
 
     # ═══════════════════════════════════════════════════════════════════════════
@@ -200,7 +200,7 @@ ADVENTURER_EOF
 # バナー表示実行
 show_guild_cry
 
-echo -e "  \033[1;33mギルド開幕！拠点準備を開始いたす\033[0m (Setting up the guild)"
+echo -e "  \033[1;33mギルド開幕！拠点準備を開始します\033[0m (Setting up the guild)"
 echo ""
 
 # ═══════════════════════════════════════════════════════════════════════════════
@@ -331,14 +331,14 @@ if [ "$LANG_SETTING" = "ja" ]; then
 ## 🚨 要対応 - 依頼者のご判断をお待ちしております
 なし
 
-## 🔄 進行中 - 只今、冒険遂行中でござる
+## 🔄 進行中 - 現在、冒険を進行中
 なし
 
 ## ✅ 本日の報告
 | 時刻 | 依頼地 | クエスト | 報告 |
 |------|--------|----------|------|
 
-## 🎯 スキル化候補 - 承認待ち
+## 🎯 スキル化候補 - 依頼者判断待ち
 なし
 
 ## 🛠️ 生成されたスキル
@@ -359,14 +359,14 @@ else
 ## 🚨 要対応 - 依頼者のご判断をお待ちしております (Action Required - Awaiting Patron's Decision)
 なし (None)
 
-## 🔄 進行中 - 只今、冒険遂行中でござる (In Progress - On a Quest)
+## 🔄 進行中 - 現在、冒険を進行中 (In Progress - On a Quest)
 なし (None)
 
 ## ✅ 本日の報告 (Today's Reports)
 | 時刻 (Time) | 依頼地 (Location) | クエスト (Quest) | 報告 (Report) |
 |------|------|------|------|
 
-## 🎯 スキル化候補 - 承認待ち (Skill Candidates - Pending Approval)
+## 🎯 スキル化候補 - 依頼者判断待ち (Skill Candidates - Awaiting Patron Decision)
 なし (None)
 
 ## 🛠️ 生成されたスキル (Generated Skills)
@@ -609,7 +609,7 @@ NINJA_EOF
     sleep 2
     log_info "  └─ 冒険者に指示書を伝達中..."
     for i in {1..8}; do
-        tmux send-keys -t "multiagent:0.$i" "instructions/adventurer.md を読んで役割を理解せよ。汝は冒険者${i}号である。"
+        tmux send-keys -t "multiagent:0.$i" "instructions/adventurer.md を読んで役割を理解してください。あなたは冒険者${i}号です。"
         sleep 0.3
         tmux send-keys -t "multiagent:0.$i" Enter
         sleep 0.5
